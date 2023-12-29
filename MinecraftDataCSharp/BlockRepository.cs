@@ -1,25 +1,47 @@
-﻿using System.Text.Json;
-
-namespace MinecraftDataCSharp;
+﻿namespace MinecraftDataCSharp;
 
 public static class BlockRepository
 {
-    public static List<Block> GetBlocks()
+    private static List<Block> blocks = [];
+
+    public static List<Block> GetAllBlocks()
     {
+        if (blocks.Count != 0)
+        {
+            return blocks;
+        }
+
         const string blocksFilePath =
             @"C:\git\minecraft-data-csharp\minecraft_data\data\pc\1.20\blocks.json";
 
         var fileText = File.ReadAllText(blocksFilePath);
 
-        var blocks = JsonSerializer.Deserialize<List<Block>>(fileText);
+        return blocks = JsonSerializer.Deserialize<List<Block>>(fileText) ?? [];
+    }
 
-        if (blocks is null)
-        {
-            Console.WriteLine("Failed to deserialize blocks file");
-            return [];
-        }
+    public static Block? GetBlockById(int id)
+    {
+        var blocks = GetAllBlocks();
 
-        return blocks;
+        return blocks?.FirstOrDefault(block => block.id == id);
+    }
+
+    public static Block? GetBlockByName(string name)
+    {
+        var blocks = GetAllBlocks();
+
+        return blocks?.FirstOrDefault(block =>
+                   block.name.Equals(name, StringComparison.OrdinalIgnoreCase));
+    }
+
+    public static List<Block> SearchBlocksByName(string name)
+    {
+        var blocks = GetAllBlocks();
+
+        return blocks?
+            .Where(block =>
+                   block.name.Contains(name, StringComparison.OrdinalIgnoreCase))
+            .ToList() ?? [];
     }
 }
 
@@ -42,10 +64,10 @@ public class Block
     public State[] states { get; set; }
     public int?[] drops { get; set; }
     public string boundingBox { get; set; }
-    public Harvesttools harvestTools { get; set; }
+    public HarvestTools harvestTools { get; set; }
 }
 
-public class Harvesttools
+public class HarvestTools
 {
     public bool _779 { get; set; }
     public bool _784 { get; set; }
