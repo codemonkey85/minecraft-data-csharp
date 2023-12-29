@@ -1,5 +1,5 @@
-﻿foreach (var block in BlockRepository.SearchBlocksByName("diamond")
+﻿foreach (var effect in EffectRepository.SearchEffectsByName("strength")
     .Take(10))
 {
-    Console.WriteLine($"{block.id} - {block.name}");
+    Console.WriteLine($"{effect.id} - {effect.name}");
 }

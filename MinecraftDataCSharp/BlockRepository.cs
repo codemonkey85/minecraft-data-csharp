@@ -31,7 +31,7 @@ public static class BlockRepository
         var blocks = GetAllBlocks();
 
         return blocks?.FirstOrDefault(block =>
-                   block.name.Equals(name, StringComparison.OrdinalIgnoreCase));
+               block.name.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
 
     public static List<Block> SearchBlocksByName(string name)
