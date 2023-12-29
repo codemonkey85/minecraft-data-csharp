@@ -11,10 +11,7 @@ public class EffectRepository
             return effects;
         }
 
-        const string effectsFilePath =
-            @"C:\git\minecraft-data-csharp\minecraft_data\data\pc\1.20\effects.json";
-
-        var fileText = File.ReadAllText(effectsFilePath);
+        var fileText = File.ReadAllText(Constants.EffectsFilePath);
 
         return effects = JsonSerializer.Deserialize<List<Effect>>(fileText) ?? [];
     }

@@ -11,10 +11,7 @@ public static class BlockRepository
             return blocks;
         }
 
-        const string blocksFilePath =
-            @"C:\git\minecraft-data-csharp\minecraft_data\data\pc\1.20\blocks.json";
-
-        var fileText = File.ReadAllText(blocksFilePath);
+        var fileText = File.ReadAllText(Constants.BlocksFilePath);
 
         return blocks = JsonSerializer.Deserialize<List<Block>>(fileText) ?? [];
     }
