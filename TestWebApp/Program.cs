@@ -9,7 +9,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 services
-    .AddSingleton<IFileApi, FileApi>()
+    .AddSingleton<IFileApi, WebFileApi>()
     .AddSingleton<BlockRepository>()
     .AddSingleton<EffectRepository>()
     .AddSingleton<ItemRepository>()

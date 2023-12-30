@@ -2,6 +2,8 @@
 
 public class EffectRepository(IFileApi fileApi)
 {
+    private IFileApi FileApi { get; set; } = fileApi;
+
     private List<Effect> effects = [];
 
     public List<Effect> GetAllEffects()
@@ -11,7 +13,7 @@ public class EffectRepository(IFileApi fileApi)
             return effects;
         }
 
-        var fileText = File.ReadAllText(Constants.EffectsFilePath);
+        var fileText = FileApi.ReadAllText(Constants.EffectsFilePath);
 
         return effects = JsonSerializer.Deserialize<List<Effect>>(fileText) ?? [];
     }

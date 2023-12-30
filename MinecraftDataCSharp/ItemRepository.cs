@@ -2,6 +2,8 @@
 
 public class ItemRepository(IFileApi fileApi)
 {
+    private IFileApi FileApi { get; set; } = fileApi;
+
     private List<Item> items = [];
 
     public List<Item> GetAllItems()
@@ -11,7 +13,7 @@ public class ItemRepository(IFileApi fileApi)
             return items;
         }
 
-        var fileText = File.ReadAllText(Constants.ItemsFilePath);
+        var fileText = FileApi.ReadAllText(Constants.ItemsFilePath);
 
         return items = JsonSerializer.Deserialize<List<Item>>(fileText) ?? [];
     }

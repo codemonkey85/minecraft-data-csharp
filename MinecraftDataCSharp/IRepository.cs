@@ -1,5 +1,5 @@
 ﻿namespace MinecraftDataCSharp;
 
-public class FileApi : IFileApi
+public interface IRepository
 {
 }

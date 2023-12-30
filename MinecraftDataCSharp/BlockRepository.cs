@@ -1,7 +1,9 @@
 ﻿namespace MinecraftDataCSharp;
 
-public class BlockRepository(IFileApi fileApi)
+public class BlockRepository(IFileApi fileApi) : IRepository
 {
+    private IFileApi FileApi { get; set; } = fileApi;
+
     private List<Block> blocks = [];
 
     public List<Block> GetAllBlocks()
@@ -11,7 +13,7 @@ public class BlockRepository(IFileApi fileApi)
             return blocks;
         }
 
-        var fileText = File.ReadAllText(Constants.BlocksFilePath);
+        var fileText = FileApi.ReadAllText(Constants.BlocksFilePath);
 
         return blocks = JsonSerializer.Deserialize<List<Block>>(fileText) ?? [];
     }
