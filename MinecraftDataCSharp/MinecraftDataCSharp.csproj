@@ -16,7 +16,7 @@
 		<PackageTags>minecraft;csharp;</PackageTags>
 		<PackageReleaseNotes>Initial release</PackageReleaseNotes>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<Version>1.0.0.4</Version>
+		<Version>1.0.0.5</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -31,13 +31,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="data\data\**">
+		<Content Include="data\data\**">
 			<Pack>True</Pack>
-			<PackagePath>data\data</PackagePath>
+			<PackagePath>content\data\data\;contentFiles\any\any\data\data\</PackagePath>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<PackageCopyToOutput>true</PackageCopyToOutput>
-		</None>
-		<None Include="build\*.*" Pack="true" PackagePath="build"></None>
+		</Content>
 	</ItemGroup>
 
 </Project>

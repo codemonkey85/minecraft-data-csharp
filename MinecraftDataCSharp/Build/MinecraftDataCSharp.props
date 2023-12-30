@@ -1,8 +1,0 @@
-<Project>
-    <Target Name="CopyToOutputFolder" BeforeTargets="Build">
-        <ItemGroup>
-            <File Include="$(MSBuildThisFileDirectory)..\data\data\**"></File>
-        </ItemGroup>
-        <Copy SourceFiles="@(File)" DestinationFolder="$(TargetDir)"></Copy>
-    </Target>
-</Project>
