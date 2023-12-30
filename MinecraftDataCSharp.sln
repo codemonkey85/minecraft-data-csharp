@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinecraftDataCSharp", "Mine
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsoleApp", "TestConsoleApp\TestConsoleApp.csproj", "{272071DD-1BCA-4BE7-8F2C-EB6E175061FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApp", "TestWebApp\TestWebApp.csproj", "{D9DDCEC8-D997-41BA-879F-B2FC828549DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebApp", "TestWebApp\TestWebApp.csproj", "{D9DDCEC8-D997-41BA-879F-B2FC828549DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,11 +22,9 @@ Global
 		{272071DD-1BCA-4BE7-8F2C-EB6E175061FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{272071DD-1BCA-4BE7-8F2C-EB6E175061FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{272071DD-1BCA-4BE7-8F2C-EB6E175061FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{272071DD-1BCA-4BE7-8F2C-EB6E175061FC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D9DDCEC8-D997-41BA-879F-B2FC828549DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D9DDCEC8-D997-41BA-879F-B2FC828549DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9DDCEC8-D997-41BA-879F-B2FC828549DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D9DDCEC8-D997-41BA-879F-B2FC828549DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
