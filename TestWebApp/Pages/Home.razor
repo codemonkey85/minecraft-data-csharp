@@ -12,6 +12,13 @@
     Minecraft Data - C#
 </h1>
 
+@if (BlocksList is [] && ItemsList is [] && EffectsList is [])
+{
+    <p>
+        Loading data...
+    </p>
+}
+
 @if (BlocksList is { Count: > 0 })
 {
     <h2>Blocks</h2>
