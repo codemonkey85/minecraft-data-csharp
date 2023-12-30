@@ -1,10 +1,10 @@
 ﻿namespace MinecraftDataCSharp;
 
-public static class ItemRepository
+public class ItemRepository(IFileApi fileApi)
 {
-    private static List<Item> items = [];
+    private List<Item> items = [];
 
-    public static List<Item> GetAllItems()
+    public List<Item> GetAllItems()
     {
         if (items.Count != 0)
         {
@@ -16,14 +16,14 @@ public static class ItemRepository
         return items = JsonSerializer.Deserialize<List<Item>>(fileText) ?? [];
     }
 
-    public static Item? GetItemById(int id)
+    public Item? GetItemById(int id)
     {
         var items = GetAllItems();
 
         return items?.FirstOrDefault(item => item.id == id);
     }
 
-    public static Item? GetItemByName(string name)
+    public Item? GetItemByName(string name)
     {
         var items = GetAllItems();
 
@@ -31,7 +31,7 @@ public static class ItemRepository
                item.name.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
 
-    public static List<Item> SearchItemsByName(string name)
+    public List<Item> SearchItemsByName(string name)
     {
         var items = GetAllItems();
 

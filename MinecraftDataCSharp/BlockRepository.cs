@@ -1,10 +1,10 @@
 ﻿namespace MinecraftDataCSharp;
 
-public static class BlockRepository
+public class BlockRepository(IFileApi fileApi)
 {
-    private static List<Block> blocks = [];
+    private List<Block> blocks = [];
 
-    public static List<Block> GetAllBlocks()
+    public List<Block> GetAllBlocks()
     {
         if (blocks.Count != 0)
         {
@@ -16,14 +16,14 @@ public static class BlockRepository
         return blocks = JsonSerializer.Deserialize<List<Block>>(fileText) ?? [];
     }
 
-    public static Block? GetBlockById(int id)
+    public Block? GetBlockById(int id)
     {
         var blocks = GetAllBlocks();
 
         return blocks?.FirstOrDefault(block => block.id == id);
     }
 
-    public static Block? GetBlockByName(string name)
+    public Block? GetBlockByName(string name)
     {
         var blocks = GetAllBlocks();
 
@@ -31,7 +31,7 @@ public static class BlockRepository
                block.name.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
 
-    public static List<Block> SearchBlocksByName(string name)
+    public List<Block> SearchBlocksByName(string name)
     {
         var blocks = GetAllBlocks();
 

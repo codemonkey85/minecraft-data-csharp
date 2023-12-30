@@ -1,10 +1,10 @@
 ﻿namespace MinecraftDataCSharp;
 
-public class EffectRepository
+public class EffectRepository(IFileApi fileApi)
 {
-    private static List<Effect> effects = [];
+    private List<Effect> effects = [];
 
-    public static List<Effect> GetAllEffects()
+    public List<Effect> GetAllEffects()
     {
         if (effects.Count != 0)
         {
@@ -16,14 +16,14 @@ public class EffectRepository
         return effects = JsonSerializer.Deserialize<List<Effect>>(fileText) ?? [];
     }
 
-    public static Effect? GetEffectById(int id)
+    public Effect? GetEffectById(int id)
     {
         var effects = GetAllEffects();
 
         return effects?.FirstOrDefault(effect => effect.id == id);
     }
 
-    public static Effect? GetEffectByName(string name)
+    public Effect? GetEffectByName(string name)
     {
         var effects = GetAllEffects();
 
@@ -31,7 +31,7 @@ public class EffectRepository
                effect.name.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
 
-    public static List<Effect> SearchEffectsByName(string name)
+    public List<Effect> SearchEffectsByName(string name)
     {
         var effects = GetAllEffects();
 

@@ -2,12 +2,14 @@
 
 public static class Constants
 {
+    public const string RootPath = @"data";
+
     public const string BlocksFilePath =
-        @"C:\git\minecraft-data-csharp\minecraft_data\data\pc\1.20\blocks.json";
+        $@"{RootPath}\data\pc\1.20\blocks.json";
 
     public const string EffectsFilePath =
-        @"C:\git\minecraft-data-csharp\minecraft_data\data\pc\1.20\effects.json";
+        $@"{RootPath}\data\pc\1.20\effects.json";
 
     public const string ItemsFilePath =
-        @"C:\git\minecraft-data-csharp\minecraft_data\data\pc\1.20\items.json";
+        $@"{RootPath}\data\pc\1.20\items.json";
 }
