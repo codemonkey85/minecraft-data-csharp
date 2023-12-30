@@ -12,7 +12,7 @@ jobs:
   build:
     env:
       BUILD_CONFIG: "Release"
-      SOLUTION: "MySolution.sln"
+      SOLUTION: "MinecraftDataCSharp.sln"
 
     runs-on: ubuntu-latest
 
