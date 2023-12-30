@@ -4,7 +4,30 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>minecraft-data-csharp</Title>
+		<Authors>codemonkey85</Authors>
+		<Description>A C# wrapper for PrismarineJS/minecraft-data</Description>
+		<Copyright>Copyright 2023</Copyright>
+		<PackageProjectUrl>https://github.com/codemonkey85/minecraft-data-csharp</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/codemonkey85/minecraft-data-csharp</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>minecraft;csharp;</PackageTags>
+		<PackageReleaseNotes>Initial release</PackageReleaseNotes>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 	<ItemGroup>
 		<None Update="data\data\**">
