@@ -1,0 +1,3 @@
+[submodule "MinecraftDataCSharp/data"]
+	path = MinecraftDataCSharp/data
+	url = https://github.com/PrismarineJS/minecraft-data.git
