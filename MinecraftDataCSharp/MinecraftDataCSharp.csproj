@@ -31,10 +31,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="data\data\**" Pack="true" PackagePath="data\data">
+		<None Include="data\data\**" Pack="true" PackagePath="File">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<PackageCopyToOutput>true</PackageCopyToOutput>
 		</None>
+		<None Include="Build\MinecraftDataCSharp.props" Pack="true" PackagePath="build"></None>
 	</ItemGroup>
 
 </Project>
