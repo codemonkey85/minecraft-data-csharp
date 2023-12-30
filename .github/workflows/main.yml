@@ -1,4 +1,4 @@
-name: publish-release
+name: publish-package
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: publish-release
+    name: publish-package
     runs-on: ubuntu-latest
 
     steps:
