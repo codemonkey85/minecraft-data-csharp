@@ -9,10 +9,10 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 services
-    .AddSingleton<IFileApi, WebFileApi>()
-    .AddSingleton<BlockRepository>()
-    .AddSingleton<EffectRepository>()
-    .AddSingleton<ItemRepository>()
+    .AddScoped<IFileApi, WebFileApi>()
+    .AddScoped<BlockRepository>()
+    .AddScoped<EffectRepository>()
+    .AddScoped<ItemRepository>()
     .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 await builder.Build().RunAsync();

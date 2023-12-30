@@ -2,5 +2,5 @@
 
 public interface IFileApi
 {
-    string ReadAllText(string path);
+    Task<string> ReadAllText(string path);
 }

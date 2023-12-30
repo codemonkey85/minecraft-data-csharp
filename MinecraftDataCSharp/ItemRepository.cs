@@ -6,36 +6,36 @@ public class ItemRepository(IFileApi fileApi)
 
     private List<Item> items = [];
 
-    public List<Item> GetAllItems()
+    public async Task<List<Item>> GetAllItems()
     {
         if (items.Count != 0)
         {
             return items;
         }
 
-        var fileText = FileApi.ReadAllText(Constants.ItemsFilePath);
+        var fileText = await FileApi.ReadAllText(Constants.ItemsFilePath);
 
         return items = JsonSerializer.Deserialize<List<Item>>(fileText) ?? [];
     }
 
-    public Item? GetItemById(int id)
+    public async Task<Item?> GetItemById(int id)
     {
-        var items = GetAllItems();
+        var items = await GetAllItems();
 
         return items?.FirstOrDefault(item => item.id == id);
     }
 
-    public Item? GetItemByName(string name)
+    public async Task<Item?> GetItemByName(string name)
     {
-        var items = GetAllItems();
+        var items = await GetAllItems();
 
         return items?.FirstOrDefault(item =>
                item.name.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
 
-    public List<Item> SearchItemsByName(string name)
+    public async Task<List<Item>> SearchItemsByName(string name)
     {
-        var items = GetAllItems();
+        var items = await GetAllItems();
 
         return items?
             .Where(item =>

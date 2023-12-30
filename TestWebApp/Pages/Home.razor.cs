@@ -2,9 +2,11 @@ namespace TestWebApp.Pages;
 
 public partial class Home
 {
-    private void ButtonClicked()
+    private async void ButtonClicked()
     {
-        foreach (var item in ItemRepository.SearchItemsByName("diamond")
+        var items = await ItemRepository.SearchItemsByName("diamond");
+
+        foreach (var item in items
             .Take(10))
         {
             Console.WriteLine($"{item.id} - {item.name}");

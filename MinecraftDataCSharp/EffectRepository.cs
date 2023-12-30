@@ -6,36 +6,36 @@ public class EffectRepository(IFileApi fileApi)
 
     private List<Effect> effects = [];
 
-    public List<Effect> GetAllEffects()
+    public async Task<List<Effect>> GetAllEffects()
     {
         if (effects.Count != 0)
         {
             return effects;
         }
 
-        var fileText = FileApi.ReadAllText(Constants.EffectsFilePath);
+        var fileText = await FileApi.ReadAllText(Constants.EffectsFilePath);
 
         return effects = JsonSerializer.Deserialize<List<Effect>>(fileText) ?? [];
     }
 
-    public Effect? GetEffectById(int id)
+    public async Task<Effect?> GetEffectById(int id)
     {
-        var effects = GetAllEffects();
+        var effects = await GetAllEffects();
 
         return effects?.FirstOrDefault(effect => effect.id == id);
     }
 
-    public Effect? GetEffectByName(string name)
+    public async Task<Effect?> GetEffectByName(string name)
     {
-        var effects = GetAllEffects();
+        var effects = await GetAllEffects();
 
         return effects?.FirstOrDefault(effect =>
                effect.name.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
 
-    public List<Effect> SearchEffectsByName(string name)
+    public async Task<List<Effect>> SearchEffectsByName(string name)
     {
-        var effects = GetAllEffects();
+        var effects = await GetAllEffects();
 
         return effects?
             .Where(effect =>

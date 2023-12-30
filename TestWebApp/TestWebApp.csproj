@@ -15,4 +15,8 @@
     <ProjectReference Include="..\MinecraftDataCSharp\MinecraftDataCSharp.csproj" />
   </ItemGroup>
 
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+		<Exec Command="xcopy /Y /R /D /E &quot;$(SolutionDir)MinecraftDataCSharp\data\data\*&quot; &quot;$(ProjectDir)wwwroot\data\data\&quot;" />
+	</Target>
+
 </Project>

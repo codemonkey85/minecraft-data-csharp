@@ -1,6 +1,7 @@
 ﻿namespace TestWebApp;
 
-public class WebFileApi : IFileApi
+public class WebFileApi(HttpClient httpClient) : IFileApi
 {
-    public string ReadAllText(string path) => throw new NotImplementedException();
+    public Task<string> ReadAllText(string path) =>
+        httpClient.GetStringAsync(path);
 }

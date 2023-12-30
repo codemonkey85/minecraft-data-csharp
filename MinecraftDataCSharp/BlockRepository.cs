@@ -6,36 +6,36 @@ public class BlockRepository(IFileApi fileApi) : IRepository
 
     private List<Block> blocks = [];
 
-    public List<Block> GetAllBlocks()
+    public async Task<List<Block>> GetAllBlocks()
     {
         if (blocks.Count != 0)
         {
             return blocks;
         }
 
-        var fileText = FileApi.ReadAllText(Constants.BlocksFilePath);
+        var fileText = await FileApi.ReadAllText(Constants.BlocksFilePath);
 
         return blocks = JsonSerializer.Deserialize<List<Block>>(fileText) ?? [];
     }
 
-    public Block? GetBlockById(int id)
+    public async Task<Block?> GetBlockById(int id)
     {
-        var blocks = GetAllBlocks();
+        var blocks = await GetAllBlocks();
 
         return blocks?.FirstOrDefault(block => block.id == id);
     }
 
-    public Block? GetBlockByName(string name)
+    public async Task<Block?> GetBlockByName(string name)
     {
-        var blocks = GetAllBlocks();
+        var blocks = await GetAllBlocks();
 
         return blocks?.FirstOrDefault(block =>
                block.name.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
 
-    public List<Block> SearchBlocksByName(string name)
+    public async Task<List<Block>> SearchBlocksByName(string name)
     {
-        var blocks = GetAllBlocks();
+        var blocks = await GetAllBlocks();
 
         return blocks?
             .Where(block =>

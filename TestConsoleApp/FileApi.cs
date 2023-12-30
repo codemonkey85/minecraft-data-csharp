@@ -2,8 +2,6 @@
 
 public class FileApi : IFileApi
 {
-    public string ReadAllText(string path)
-    {
-        return File.ReadAllText(path);
-    }
+    public Task<string> ReadAllText(string path) =>
+        File.ReadAllTextAsync(path);
 }
