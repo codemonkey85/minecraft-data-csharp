@@ -1,6 +1,8 @@
 ﻿@page "/"
 
 @inject ItemRepository ItemRepository
+@inject BlockRepository BlockRepository
+@inject EffectRepository EffectRepository
 
 <PageTitle>Home</PageTitle>
 
@@ -8,6 +10,44 @@
 
 Welcome to your new app.
 
-<button @onclick="ButtonClicked">
-    Click me
-</button>
+@if (BlocksList is { Count: > 0 })
+{
+    <h2>Blocks</h2>
+
+    <ul>
+        @foreach (var block in BlocksList.Take(10))
+        {
+            <li>
+                @block.displayName
+            </li>
+        }
+    </ul>
+}
+
+@if (ItemsList is { Count: > 0 })
+{
+    <h2>Items</h2>
+
+    <ul>
+        @foreach (var item in ItemsList.Take(10))
+        {
+            <li>
+                @item.displayName
+            </li>
+        }
+    </ul>
+}
+
+@if (EffectsList is { Count: > 0 })
+{
+    <h2>Effects</h2>
+
+    <ul>
+        @foreach (var effect in EffectsList.Take(10))
+        {
+            <li>
+                @effect.displayName
+            </li>
+        }
+    </ul>
+}

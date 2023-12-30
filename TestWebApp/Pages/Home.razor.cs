@@ -2,14 +2,25 @@ namespace TestWebApp.Pages;
 
 public partial class Home
 {
-    private async void ButtonClicked()
-    {
-        var items = await ItemRepository.SearchItemsByName("diamond");
+    private List<Block> BlocksList { get; set; } = [];
 
-        foreach (var item in items
-            .Take(10))
-        {
-            Console.WriteLine($"{item.id} - {item.name}");
-        }
+    private List<Item> ItemsList { get; set; } = [];
+
+    private List<Effect> EffectsList { get; set; } = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        await InitializeBlocks();
+        await InitializeItems();
+        await InitializeEffects();
     }
+
+    private async Task InitializeItems() =>
+        ItemsList = [.. (await ItemRepository.SearchItemsByName("diamond")).OrderBy(item => item.displayName)];
+
+    private async Task InitializeBlocks() =>
+        BlocksList = [.. (await BlockRepository.SearchBlocksByName("diamond")).OrderBy(block => block.displayName)];
+
+    private async Task InitializeEffects() =>
+        EffectsList = [.. (await EffectRepository.SearchEffectsByName("s")).OrderBy(effect => effect.displayName)];
 }
