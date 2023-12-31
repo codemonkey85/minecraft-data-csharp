@@ -3,16 +3,21 @@
 public static class Constants
 {
     public const string RootPath = @"data";
+    public const string Edition = "pc";
+    public const string Version = "1.20";
 
     public const string BlocksFilePath =
-        $@"{RootPath}\data\pc\1.20\blocks.json";
+        $@"{RootPath}\data\{Edition}\{Version}\blocks.json";
 
     public const string EffectsFilePath =
-        $@"{RootPath}\data\pc\1.20\effects.json";
+        $@"{RootPath}\data\{Edition}\{Version}\effects.json";
 
     public const string ItemsFilePath =
-        $@"{RootPath}\data\pc\1.20\items.json";
+        $@"{RootPath}\data\{Edition}\{Version}\items.json";
 
     public const string BiomesFilePath =
-        $@"{RootPath}\data\pc\1.20\biomes.json";
+        $@"{RootPath}\data\{Edition}\{Version}\biomes.json";
+
+    public const string EntitiesFilePath =
+        $@"{RootPath}\data\{Edition}\{Version}\entities.json";
 }

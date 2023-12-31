@@ -10,6 +10,7 @@ services
     .AddScoped<EffectRepository>()
     .AddScoped<ItemRepository>()
     .AddScoped<BiomeRepository>()
+    .AddScoped<EntityRepository>()
     .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 await builder.Build().RunAsync();

@@ -5,7 +5,8 @@ builder.ConfigureServices((hostingContext, services) => services
     .AddScoped<BlockRepository>()
     .AddScoped<EffectRepository>()
     .AddScoped<ItemRepository>()
-    .AddScoped<BiomeRepository>());
+    .AddScoped<BiomeRepository>()
+    .AddScoped<EntityRepository>());
 
 using var host = builder.Build();
 

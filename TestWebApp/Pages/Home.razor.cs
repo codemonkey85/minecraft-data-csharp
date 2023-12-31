@@ -10,12 +10,15 @@ public partial class Home
 
     private List<Biome> BiomesList { get; set; } = [];
 
+    private List<Entity> EntitiesList { get; set; } = [];
+
     protected override async Task OnInitializedAsync()
     {
         await InitializeBlocks();
         await InitializeItems();
         await InitializeEffects();
         await InitializeBiomes();
+        await InitializeEntities();
     }
 
     private async Task InitializeItems() =>
@@ -28,5 +31,8 @@ public partial class Home
         EffectsList = [.. (await EffectRepository.SearchEffectsByName("s")).OrderBy(effect => effect.displayName)];
 
     private async Task InitializeBiomes() =>
-        BiomesList = [.. (await BiomeRepository.SearchBiomesByName("s")).OrderBy(effect => effect.displayName)];
+        BiomesList = [.. (await BiomeRepository.SearchBiomesByName("s")).OrderBy(biome => biome.displayName)];
+
+    private async Task InitializeEntities() =>
+        EntitiesList = [.. (await EntityRepository.SearchEntitiesByName("s")).OrderBy(entity => entity.displayName)];
 }
