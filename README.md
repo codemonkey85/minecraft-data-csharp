@@ -1,6 +1,8 @@
 # minecraft-data-csharp
 
-A C# wrapper for [PrismarineJS/minecraft-data](https://github.com/PrismarineJS/minecraft-data)
+A C# wrapper for [PrismarineJS/minecraft-data](https://github.com/PrismarineJS/minecraft-data).
+
+Used for [MinecraftCommandBuilder](https://github.com/codemonkey85/MinecraftCommandBuilder).
 
 [![publish-package][githubactionslogo]][githubactionslink]
 [![Nuget][nugetlogo]][nugetlink]
