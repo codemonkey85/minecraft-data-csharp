@@ -12,6 +12,8 @@ public partial class Home
 
     private List<Entity> EntitiesList { get; set; } = [];
 
+    private List<Enchantment> EnchantmentsList { get; set; } = [];
+
     protected override async Task OnInitializedAsync()
     {
         await InitializeBlocks();
@@ -19,6 +21,7 @@ public partial class Home
         await InitializeEffects();
         await InitializeBiomes();
         await InitializeEntities();
+        await InitializeEnchantments();
     }
 
     private async Task InitializeItems() =>
@@ -35,4 +38,7 @@ public partial class Home
 
     private async Task InitializeEntities() =>
         EntitiesList = [.. (await EntityRepository.SearchEntitiesByName("s")).OrderBy(entity => entity.displayName)];
+
+    private async Task InitializeEnchantments() =>
+        EnchantmentsList = [.. (await EnchantmentRepository.SearchEnchantmentsByName("s")).OrderBy(enchantment => enchantment.displayName)];
 }

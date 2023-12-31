@@ -6,7 +6,8 @@ builder.ConfigureServices((hostingContext, services) => services
     .AddScoped<EffectRepository>()
     .AddScoped<ItemRepository>()
     .AddScoped<BiomeRepository>()
-    .AddScoped<EntityRepository>());
+    .AddScoped<EntityRepository>()
+    .AddScoped<EnchantmentRepository>());
 
 using var host = builder.Build();
 

@@ -11,6 +11,7 @@ services
     .AddScoped<ItemRepository>()
     .AddScoped<BiomeRepository>()
     .AddScoped<EntityRepository>()
+    .AddScoped<EnchantmentRepository>()
     .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 await builder.Build().RunAsync();

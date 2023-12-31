@@ -8,11 +8,12 @@
     Minecraft Data - C#
 </h1>
 
-@if (BlocksList is [] && 
-     ItemsList is [] &&
-     EffectsList is [] &&
-     BiomesList is [] &&
-     EntitiesList is [])
+@if (BlocksList is [] &&
+    ItemsList is [] &&
+    EffectsList is [] &&
+    BiomesList is [] &&
+    EntitiesList is [] &&
+    EnchantmentsList is [])
 {
     <p>
         Loading data...
@@ -84,6 +85,20 @@
         {
             <li>
                 @entity.displayName
+            </li>
+        }
+    </ul>
+}
+
+@if (EnchantmentsList is { Count: > 0 })
+{
+    <h2>Enchantments</h2>
+
+    <ul>
+        @foreach (var enchantment in EnchantmentsList.Take(10))
+        {
+            <li>
+                @enchantment.displayName
             </li>
         }
     </ul>

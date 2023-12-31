@@ -20,4 +20,7 @@ public static class Constants
 
     public const string EntitiesFilePath =
         $@"{RootPath}\data\{Edition}\{Version}\entities.json";
+
+    public const string EnchantmentsFilePath =
+        $@"{RootPath}\data\{Edition}\{Version}\enchantments.json";
 }
