@@ -16,6 +16,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
+        with:
+          # Fetches all commits (needed for lerna / semantic release to correctly calculate version)
+          fetch-depth: 0
+          # Whether to check out submodules: `true` to check out submodules or `recursive` to recursively check out submodules.
+          submodules: "recursive"
 
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4.0.0
