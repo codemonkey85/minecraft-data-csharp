@@ -1,7 +1,3 @@
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using TestWebApp;
-
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 var services = builder.Services;
 

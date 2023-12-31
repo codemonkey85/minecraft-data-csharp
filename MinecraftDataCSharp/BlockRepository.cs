@@ -1,6 +1,6 @@
 ﻿namespace MinecraftDataCSharp;
 
-public class BlockRepository(IFileApi fileApi) : IRepository
+public class BlockRepository(IFileApi fileApi)
 {
     private IFileApi FileApi { get; set; } = fileApi;
 
