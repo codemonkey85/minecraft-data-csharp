@@ -12,4 +12,7 @@ public static class Constants
 
     public const string ItemsFilePath =
         $@"{RootPath}\data\pc\1.20\items.json";
+
+    public const string BiomesFilePath =
+        $@"{RootPath}\data\pc\1.20\biomes.json";
 }

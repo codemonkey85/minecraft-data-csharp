@@ -1,9 +1,5 @@
 ﻿@page "/"
 
-@inject ItemRepository ItemRepository
-@inject BlockRepository BlockRepository
-@inject EffectRepository EffectRepository
-
 <PageTitle>
     Minecraft Data - C#
 </PageTitle>
@@ -12,7 +8,10 @@
     Minecraft Data - C#
 </h1>
 
-@if (BlocksList is [] && ItemsList is [] && EffectsList is [])
+@if (BlocksList is [] &&
+   ItemsList is [] &&
+   EffectsList is [] &&
+   BiomesList is [])
 {
     <p>
         Loading data...
@@ -56,6 +55,20 @@
         {
             <li>
                 @effect.displayName
+            </li>
+        }
+    </ul>
+}
+
+@if (BiomesList is { Count: > 0 })
+{
+    <h2>Biomes</h2>
+
+    <ul>
+        @foreach (var biome in BiomesList.Take(10))
+        {
+            <li>
+                @biome.displayName
             </li>
         }
     </ul>

@@ -8,11 +8,14 @@ public partial class Home
 
     private List<Effect> EffectsList { get; set; } = [];
 
+    private List<Biome> BiomesList { get; set; } = [];
+
     protected override async Task OnInitializedAsync()
     {
         await InitializeBlocks();
         await InitializeItems();
         await InitializeEffects();
+        await InitializeBiomes();
     }
 
     private async Task InitializeItems() =>
@@ -23,4 +26,7 @@ public partial class Home
 
     private async Task InitializeEffects() =>
         EffectsList = [.. (await EffectRepository.SearchEffectsByName("s")).OrderBy(effect => effect.displayName)];
+
+    private async Task InitializeBiomes() =>
+        BiomesList = [.. (await BiomeRepository.SearchBiomesByName("s")).OrderBy(effect => effect.displayName)];
 }
