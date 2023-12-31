@@ -1,4 +1,6 @@
-﻿namespace MinecraftDataCSharp;
+﻿using System.Text.RegularExpressions;
+
+namespace MinecraftDataCSharp;
 
 public class EffectRepository(IFileApi fileApi)
 {
@@ -44,10 +46,21 @@ public class EffectRepository(IFileApi fileApi)
     }
 }
 
-public class Effect
+public partial class Effect
 {
     public int id { get; set; }
     public string name { get; set; }
+    public string bedrock_name => GetBedrockName();
     public string displayName { get; set; }
     public string type { get; set; }
+
+    private string GetBedrockName()
+    {
+        // convert from camelCase to snake_case
+        var snakeCase = CamelToSnake().Replace(name, "_$1").ToLower().Remove(0, 1);
+        return snakeCase;
+    }
+
+    [GeneratedRegex("([A-Z])")]
+    private static partial Regex CamelToSnake();
 }
