@@ -47,23 +47,23 @@ public class BlockRepository(IFileApi fileApi)
 public class Block
 {
     public int id { get; set; }
-    public string name { get; set; }
-    public string displayName { get; set; }
+    public string name { get; set; } = string.Empty;
+    public string displayName { get; set; } = string.Empty;
     public float hardness { get; set; }
     public float resistance { get; set; }
     public int stackSize { get; set; }
     public bool diggable { get; set; }
-    public string material { get; set; }
+    public string material { get; set; } = string.Empty;
     public bool transparent { get; set; }
     public int emitLight { get; set; }
     public int filterLight { get; set; }
     public int defaultState { get; set; }
     public int minStateId { get; set; }
     public int maxStateId { get; set; }
-    public State[] states { get; set; }
-    public int?[] drops { get; set; }
-    public string boundingBox { get; set; }
-    public HarvestTools harvestTools { get; set; }
+    public State[] states { get; set; } = [];
+    public int?[] drops { get; set; } = [];
+    public string boundingBox { get; set; } = string.Empty;
+    public HarvestTools harvestTools { get; set; } = default!;
 }
 
 public class HarvestTools
@@ -91,8 +91,8 @@ public class HarvestTools
 
 public class State
 {
-    public string name { get; set; }
-    public string type { get; set; }
+    public string name { get; set; } = string.Empty;
+    public string type { get; set; } = string.Empty;
     public int num_values { get; set; }
-    public string[] values { get; set; }
+    public string[] values { get; set; } = [];
 }

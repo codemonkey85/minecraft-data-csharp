@@ -47,11 +47,11 @@ public class BiomeRepository(IFileApi fileApi)
 public class Biome
 {
     public int id { get; set; }
-    public string name { get; set; }
-    public string category { get; set; }
+    public string name { get; set; } = string.Empty;
+    public string category { get; set; } = string.Empty;
     public float temperature { get; set; }
     public bool has_precipitation { get; set; }
-    public string dimension { get; set; }
-    public string displayName { get; set; }
+    public string dimension { get; set; } = string.Empty;
+    public string displayName { get; set; } = string.Empty;
     public int color { get; set; }
 }

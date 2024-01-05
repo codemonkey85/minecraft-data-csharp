@@ -47,15 +47,15 @@ public class EnchantmentRepository(IFileApi fileApi)
 public class Enchantment
 {
     public int id { get; set; }
-    public string name { get; set; }
-    public string displayName { get; set; }
+    public string name { get; set; } = string.Empty;
+    public string displayName { get; set; } = string.Empty;
     public int maxLevel { get; set; }
-    public Mincost minCost { get; set; }
-    public Maxcost maxCost { get; set; }
+    public Mincost minCost { get; set; } = default!;
+    public Maxcost maxCost { get; set; } = default!;
     public bool treasureOnly { get; set; }
     public bool curse { get; set; }
-    public string[] exclude { get; set; }
-    public string category { get; set; }
+    public string[] exclude { get; set; } = [];
+    public string category { get; set; } = string.Empty;
     public int weight { get; set; }
     public bool tradeable { get; set; }
     public bool discoverable { get; set; }

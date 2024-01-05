@@ -47,10 +47,10 @@ public class ItemRepository(IFileApi fileApi)
 public class Item
 {
     public int id { get; set; }
-    public string name { get; set; }
-    public string displayName { get; set; }
+    public string name { get; set; } = string.Empty;
+    public string displayName { get; set; } = string.Empty;
     public int stackSize { get; set; }
-    public string[] enchantCategories { get; set; }
+    public string[] enchantCategories { get; set; } = [];
     public int maxDurability { get; set; }
-    public string[] repairWith { get; set; }
+    public string[] repairWith { get; set; } = [];
 }

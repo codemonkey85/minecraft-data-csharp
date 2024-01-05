@@ -49,10 +49,10 @@ public class EffectRepository(IFileApi fileApi)
 public partial class Effect
 {
     public int id { get; set; }
-    public string name { get; set; }
+    public string name { get; set; } = string.Empty;
     public string bedrock_name => GetBedrockName();
-    public string displayName { get; set; }
-    public string type { get; set; }
+    public string displayName { get; set; } = string.Empty;
+    public string type { get; set; } = string.Empty;
 
     private string GetBedrockName()
     {

@@ -48,11 +48,11 @@ public class Entity
 {
     public int id { get; set; }
     public int internalId { get; set; }
-    public string name { get; set; }
-    public string displayName { get; set; }
+    public string name { get; set; } = string.Empty;
+    public string displayName { get; set; } = string.Empty;
     public float width { get; set; }
     public float height { get; set; }
-    public string type { get; set; }
-    public string category { get; set; }
-    public string[] metadataKeys { get; set; }
+    public string type { get; set; } = string.Empty;
+    public string category { get; set; } = string.Empty;
+    public string[] metadataKeys { get; set; } = [];
 }
