@@ -1,4 +1,4 @@
-﻿namespace MinecraftDataCSharp;
+﻿namespace MinecraftDataCSharp.Repositories;
 
 public class EntityRepository(IFileApi fileApi)
 {

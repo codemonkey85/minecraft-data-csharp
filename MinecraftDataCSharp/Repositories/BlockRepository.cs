@@ -1,4 +1,4 @@
-﻿namespace MinecraftDataCSharp;
+﻿namespace MinecraftDataCSharp.Repositories;
 
 public class BlockRepository(IFileApi fileApi)
 {
