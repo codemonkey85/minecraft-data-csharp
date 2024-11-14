@@ -25,7 +25,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4.0.0
         with:
-          dotnet-version: 8.x.x
+          global-json-file: ./global.json
           # Authenticates packages to push to GPR
           source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
         env:
