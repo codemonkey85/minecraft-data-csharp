@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.2.2
         with:
           # Fetches all commits (needed for lerna / semantic release to correctly calculate version)
           fetch-depth: 0
