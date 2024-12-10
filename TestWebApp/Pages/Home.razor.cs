@@ -25,20 +25,24 @@ public partial class Home
     }
 
     private async Task InitializeItems() =>
-        ItemsList = [.. (await ItemRepository.SearchItemsByName("diamond")).OrderBy(item => item.displayName)];
+        ItemsList = [.. (await ItemRepository.SearchItemsByName("diamond")).OrderBy(item => item.DisplayName)];
 
     private async Task InitializeBlocks() =>
-        BlocksList = [.. (await BlockRepository.SearchBlocksByName("diamond")).OrderBy(block => block.displayName)];
+        BlocksList = [.. (await BlockRepository.SearchBlocksByName("diamond")).OrderBy(block => block.DisplayName)];
 
     private async Task InitializeEffects() =>
-        EffectsList = [.. (await EffectRepository.SearchEffectsByName("s")).OrderBy(effect => effect.displayName)];
+        EffectsList = [.. (await EffectRepository.SearchEffectsByName("s")).OrderBy(effect => effect.DisplayName)];
 
     private async Task InitializeBiomes() =>
-        BiomesList = [.. (await BiomeRepository.SearchBiomesByName("s")).OrderBy(biome => biome.displayName)];
+        BiomesList = [.. (await BiomeRepository.SearchBiomesByName("s")).OrderBy(biome => biome.DisplayName)];
 
     private async Task InitializeEntities() =>
-        EntitiesList = [.. (await EntityRepository.SearchEntitiesByName("s")).OrderBy(entity => entity.displayName)];
+        EntitiesList = [.. (await EntityRepository.SearchEntitiesByName("s")).OrderBy(entity => entity.DisplayName)];
 
     private async Task InitializeEnchantments() =>
-        EnchantmentsList = [.. (await EnchantmentRepository.SearchEnchantmentsByName("s")).OrderBy(enchantment => enchantment.displayName)];
+        EnchantmentsList =
+        [
+            .. (await EnchantmentRepository.SearchEnchantmentsByName("s")).OrderBy(enchantment =>
+                enchantment.DisplayName)
+        ];
 }

@@ -2,9 +2,9 @@
 
 public static class Constants
 {
-    public const string RootPath = @"data";
-    public const string Edition = "pc";
-    public const string Version = "1.20";
+    private const string RootPath = "data";
+    private const string Edition = "pc";
+    private const string Version = "1.20";
 
     public const string BlocksFilePath =
         $@"{RootPath}\data\{Edition}\{Version}\blocks.json";

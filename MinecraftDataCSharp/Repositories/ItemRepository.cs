@@ -2,55 +2,51 @@
 
 public class ItemRepository(IFileApi fileApi)
 {
-    private IFileApi FileApi { get; set; } = fileApi;
+    private IFileApi FileApi { get; } = fileApi;
 
-    private List<Item> items = [];
+    private List<Item> Items { get; set; } = [];
 
-    public async Task<List<Item>> GetAllItems()
+    private async Task GetAllItems()
     {
-        if (items.Count != 0)
+        if (Items.Count != 0)
         {
-            return items;
+            return;
         }
 
         var fileText = await FileApi.ReadAllText(Constants.ItemsFilePath);
 
-        return items = JsonSerializer.Deserialize<List<Item>>(fileText) ?? [];
+        Items = JsonSerializer.Deserialize<List<Item>>(fileText) ?? [];
     }
 
     public async Task<Item?> GetItemById(int id)
     {
-        var items = await GetAllItems();
-
-        return items?.FirstOrDefault(item => item.id == id);
+        await GetAllItems();
+        return Items.FirstOrDefault(item => item.Id == id);
     }
 
     public async Task<Item?> GetItemByName(string name)
     {
-        var items = await GetAllItems();
-
-        return items?.FirstOrDefault(item =>
-               item.name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        await GetAllItems();
+        return Items.FirstOrDefault(item =>
+            item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
 
     public async Task<List<Item>> SearchItemsByName(string name)
     {
-        var items = await GetAllItems();
-
-        return items?
-            .Where(item =>
-                   item.name.Contains(name, StringComparison.OrdinalIgnoreCase))
-            .ToList() ?? [];
+        await GetAllItems();
+        return Items.Where(item =>
+                item.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+            .ToList();
     }
 }
 
 public class Item
 {
-    public int id { get; set; }
-    public string name { get; set; } = string.Empty;
-    public string displayName { get; set; } = string.Empty;
-    public int stackSize { get; set; }
-    public string[] enchantCategories { get; set; } = [];
-    public int maxDurability { get; set; }
-    public string[] repairWith { get; set; } = [];
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string DisplayName { get; set; } = string.Empty;
+    public int StackSize { get; set; }
+    public string[] EnchantCategories { get; set; } = [];
+    public int MaxDurability { get; set; }
+    public string[] RepairWith { get; set; } = [];
 }

@@ -1,65 +1,58 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace MinecraftDataCSharp;
+namespace MinecraftDataCSharp.Repositories;
 
 public class EffectRepository(IFileApi fileApi)
 {
-    private IFileApi FileApi { get; set; } = fileApi;
+    private IFileApi FileApi { get; } = fileApi;
 
-    private List<Effect> effects = [];
+    private List<Effect> Effects { get; set; } = [];
 
-    public async Task<List<Effect>> GetAllEffects()
+    private async Task GetAllEffects()
     {
-        if (effects.Count != 0)
+        if (Effects.Count != 0)
         {
-            return effects;
+            return;
         }
 
         var fileText = await FileApi.ReadAllText(Constants.EffectsFilePath);
 
-        return effects = JsonSerializer.Deserialize<List<Effect>>(fileText) ?? [];
+        Effects = JsonSerializer.Deserialize<List<Effect>>(fileText) ?? [];
     }
 
     public async Task<Effect?> GetEffectById(int id)
     {
-        var effects = await GetAllEffects();
-
-        return effects?.FirstOrDefault(effect => effect.id == id);
+        await GetAllEffects();
+        return Effects.FirstOrDefault(effect => effect.Id == id);
     }
 
     public async Task<Effect?> GetEffectByName(string name)
     {
-        var effects = await GetAllEffects();
-
-        return effects?.FirstOrDefault(effect =>
-               effect.name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        await GetAllEffects();
+        return Effects.FirstOrDefault(effect =>
+            effect.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
 
     public async Task<List<Effect>> SearchEffectsByName(string name)
     {
-        var effects = await GetAllEffects();
-
-        return effects?
-            .Where(effect =>
-                   effect.name.Contains(name, StringComparison.OrdinalIgnoreCase))
-            .ToList() ?? [];
+        await GetAllEffects();
+        return Effects.Where(effect =>
+                effect.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+            .ToList();
     }
 }
 
 public partial class Effect
 {
-    public int id { get; set; }
-    public string name { get; set; } = string.Empty;
-    public string bedrock_name => GetBedrockName();
-    public string displayName { get; set; } = string.Empty;
-    public string type { get; set; } = string.Empty;
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string BedrockName => GetBedrockName();
+    public string DisplayName { get; set; } = string.Empty;
+    public string Type { get; set; } = string.Empty;
 
-    private string GetBedrockName()
-    {
+    private string GetBedrockName() =>
         // convert from camelCase to snake_case
-        var snakeCase = CamelToSnake().Replace(name, "_$1").ToLower().Remove(0, 1);
-        return snakeCase;
-    }
+        CamelToSnake().Replace(Name, "_$1").ToLower().Remove(0, 1);
 
     [GeneratedRegex("([A-Z])")]
     private static partial Regex CamelToSnake();
