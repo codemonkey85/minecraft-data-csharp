@@ -1,13 +1,18 @@
-name: publish-package
+name: Publish Package
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
+    paths-ignore:
+      - "**.md"
+      - ".editorconfig"
+      - '**/*.gitignore'
+      - '**/*.gitattributes'
+      - '**/*.yml'
 
 jobs:
   build:
-    name: publish-package
+    name: "Publish Package"
     runs-on: ubuntu-latest
 
     steps:
