@@ -12,11 +12,11 @@ on:
 
 jobs:
   build:
-    name: "Publish Package"
+    name: Publish Package
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4.2.2
         with:
           # Fetches all commits (needed for lerna / semantic release to correctly calculate version)
@@ -24,33 +24,22 @@ jobs:
           # Whether to check out submodules: `true` to check out submodules or `recursive` to recursively check out submodules.
           submodules: "recursive"
 
-      - name: Setup .NET Core
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4.1.0
         with:
           global-json-file: ./global.json
-          # Authenticates packages to push to GPR
-          source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
-        env:
-          NUGET_AUTH_TOKEN: "%NUGET_AUTH_TOKEN%"
 
-      - name: Install dependencies
+      - name: Restore dependencies
         run: dotnet restore
-        env:
-          NUGET_AUTH_TOKEN: ${{ github.token }}
 
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
-      - name: Test
+      - name: Run tests
         run: dotnet test --no-restore --verbosity normal
 
       - name: Pack
         run: dotnet pack --no-build --configuration Release
 
-      - name: PushNuget
+      - name: Push to NuGet
         run: dotnet nuget push **/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
-        
-      - name: PushGithub
-        run: dotnet nuget push **/*.nupkg --no-symbols --skip-duplicate
-        env:
-          NUGET_AUTH_TOKEN: ${{ github.token }}

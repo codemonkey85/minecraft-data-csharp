@@ -14,11 +14,11 @@ on:
     
 jobs:
   build:
-    name: "Build and Test"
+    name: Build and Test
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4.2.2
         with:
           # Fetches all commits (needed for lerna / semantic release to correctly calculate version)
@@ -26,12 +26,12 @@ jobs:
           # Whether to check out submodules: `true` to check out submodules or `recursive` to recursively check out submodules.
           submodules: "recursive"
 
-      - name: Setup .NET Core
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4.1.0
         with:
           global-json-file: ./global.json
 
-      - name: Install dependencies
+      - name: Restore dependencies
         run: dotnet restore
         env:
           NUGET_AUTH_TOKEN: ${{ github.token }}
@@ -39,5 +39,5 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
-      - name: Test
+      - name: Run tests
         run: dotnet test --no-restore --verbosity normal
