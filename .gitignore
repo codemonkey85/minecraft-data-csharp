@@ -365,3 +365,4 @@ FodyWeavers.xsd
 *.DS_Store
 
 TestWebApp/wwwroot/data
+.idea

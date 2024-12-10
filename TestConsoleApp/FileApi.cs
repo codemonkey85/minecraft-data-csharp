@@ -1,4 +1,5 @@
-﻿namespace MinecraftDataCSharp;
+﻿// ReSharper disable once CheckNamespace
+namespace MinecraftDataCSharp;
 
 public class FileApi : IFileApi
 {

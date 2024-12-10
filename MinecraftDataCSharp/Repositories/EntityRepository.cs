@@ -2,57 +2,53 @@
 
 public class EntityRepository(IFileApi fileApi)
 {
-    private IFileApi FileApi { get; set; } = fileApi;
+    private IFileApi FileApi { get; } = fileApi;
 
-    private List<Entity> entities = [];
+    private List<Entity> Entities { get; set; } = [];
 
-    public async Task<List<Entity>> GetAllEntities()
+    private async Task GetAllEntities()
     {
-        if (entities.Count != 0)
+        if (Entities.Count != 0)
         {
-            return entities;
+            return;
         }
 
         var fileText = await FileApi.ReadAllText(Constants.EntitiesFilePath);
 
-        return entities = JsonSerializer.Deserialize<List<Entity>>(fileText) ?? [];
+        Entities = JsonSerializer.Deserialize<List<Entity>>(fileText) ?? [];
     }
 
     public async Task<Entity?> GetEntityById(int id)
     {
-        var entities = await GetAllEntities();
-
-        return entities?.FirstOrDefault(entity => entity.id == id);
+        await GetAllEntities();
+        return Entities.FirstOrDefault(entity => entity.Id == id);
     }
 
     public async Task<Entity?> GetEntityByName(string name)
     {
-        var entities = await GetAllEntities();
-
-        return entities?.FirstOrDefault(entity =>
-               entity.name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        await GetAllEntities();
+        return Entities.FirstOrDefault(entity =>
+            entity.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
 
     public async Task<List<Entity>> SearchEntitiesByName(string name)
     {
-        var entities = await GetAllEntities();
-
-        return entities?
-            .Where(entity =>
-                   entity.name.Contains(name, StringComparison.OrdinalIgnoreCase))
-            .ToList() ?? [];
+        await GetAllEntities();
+        return Entities.Where(entity =>
+                entity.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+            .ToList();
     }
 }
 
 public class Entity
 {
-    public int id { get; set; }
-    public int internalId { get; set; }
-    public string name { get; set; } = string.Empty;
-    public string displayName { get; set; } = string.Empty;
-    public float width { get; set; }
-    public float height { get; set; }
-    public string type { get; set; } = string.Empty;
-    public string category { get; set; } = string.Empty;
-    public string[] metadataKeys { get; set; } = [];
+    public int Id { get; set; }
+    public int InternalId { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string DisplayName { get; set; } = string.Empty;
+    public float Width { get; set; }
+    public float Height { get; set; }
+    public string Type { get; set; } = string.Empty;
+    public string Category { get; set; } = string.Empty;
+    public string[] MetadataKeys { get; set; } = [];
 }

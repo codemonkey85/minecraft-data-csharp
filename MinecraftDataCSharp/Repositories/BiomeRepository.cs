@@ -2,56 +2,52 @@
 
 public class BiomeRepository(IFileApi fileApi)
 {
-    private IFileApi FileApi { get; set; } = fileApi;
+    private IFileApi FileApi { get; } = fileApi;
 
-    private List<Biome> biomes = [];
+    private List<Biome> Biomes { get; set; } = [];
 
-    public async Task<List<Biome>> GetAllBiomes()
+    private async Task GetAllBiomes()
     {
-        if (biomes.Count != 0)
+        if (Biomes.Count != 0)
         {
-            return biomes;
+            return;
         }
 
         var fileText = await FileApi.ReadAllText(Constants.BiomesFilePath);
 
-        return biomes = JsonSerializer.Deserialize<List<Biome>>(fileText) ?? [];
+        Biomes = JsonSerializer.Deserialize<List<Biome>>(fileText) ?? [];
     }
 
     public async Task<Biome?> GetBiomeById(int id)
     {
-        var biomes = await GetAllBiomes();
-
-        return biomes?.FirstOrDefault(biome => biome.id == id);
+        await GetAllBiomes();
+        return Biomes.FirstOrDefault(biome => biome.Id == id);
     }
 
     public async Task<Biome?> GetBiomeByName(string name)
     {
-        var biomes = await GetAllBiomes();
-
-        return biomes?.FirstOrDefault(biome =>
-               biome.name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        await GetAllBiomes();
+        return Biomes.FirstOrDefault(biome =>
+            biome.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
 
     public async Task<List<Biome>> SearchBiomesByName(string name)
     {
-        var biomes = await GetAllBiomes();
-
-        return biomes?
-            .Where(biome =>
-                   biome.name.Contains(name, StringComparison.OrdinalIgnoreCase))
-            .ToList() ?? [];
+        await GetAllBiomes();
+        return Biomes.Where(biome =>
+                biome.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+            .ToList();
     }
 }
 
 public class Biome
 {
-    public int id { get; set; }
-    public string name { get; set; } = string.Empty;
-    public string category { get; set; } = string.Empty;
-    public float temperature { get; set; }
-    public bool has_precipitation { get; set; }
-    public string dimension { get; set; } = string.Empty;
-    public string displayName { get; set; } = string.Empty;
-    public int color { get; set; }
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Category { get; set; } = string.Empty;
+    public float Temperature { get; set; }
+    public bool HasPrecipitation { get; set; }
+    public string Dimension { get; set; } = string.Empty;
+    public string DisplayName { get; set; } = string.Empty;
+    public int Color { get; set; }
 }

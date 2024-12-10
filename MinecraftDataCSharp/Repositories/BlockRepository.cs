@@ -2,68 +2,64 @@
 
 public class BlockRepository(IFileApi fileApi)
 {
-    private IFileApi FileApi { get; set; } = fileApi;
+    private IFileApi FileApi { get; } = fileApi;
 
-    private List<Block> blocks = [];
+    private List<Block> Blocks { get; set; } = [];
 
-    public async Task<List<Block>> GetAllBlocks()
+    private async Task GetAllBlocks()
     {
-        if (blocks.Count != 0)
+        if (Blocks.Count != 0)
         {
-            return blocks;
+            return;
         }
 
         var fileText = await FileApi.ReadAllText(Constants.BlocksFilePath);
 
-        return blocks = JsonSerializer.Deserialize<List<Block>>(fileText) ?? [];
+        Blocks = JsonSerializer.Deserialize<List<Block>>(fileText) ?? [];
     }
 
     public async Task<Block?> GetBlockById(int id)
     {
-        var blocks = await GetAllBlocks();
-
-        return blocks?.FirstOrDefault(block => block.id == id);
+        await GetAllBlocks();
+        return Blocks.FirstOrDefault(block => block.Id == id);
     }
 
     public async Task<Block?> GetBlockByName(string name)
     {
-        var blocks = await GetAllBlocks();
-
-        return blocks?.FirstOrDefault(block =>
-               block.name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        await GetAllBlocks();
+        return Blocks.FirstOrDefault(block =>
+            block.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
     }
 
     public async Task<List<Block>> SearchBlocksByName(string name)
     {
-        var blocks = await GetAllBlocks();
-
-        return blocks?
-            .Where(block =>
-                   block.name.Contains(name, StringComparison.OrdinalIgnoreCase))
-            .ToList() ?? [];
+        await GetAllBlocks();
+        return Blocks.Where(block =>
+                block.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+            .ToList();
     }
 }
 
 public class Block
 {
-    public int id { get; set; }
-    public string name { get; set; } = string.Empty;
-    public string displayName { get; set; } = string.Empty;
-    public float hardness { get; set; }
-    public float resistance { get; set; }
-    public int stackSize { get; set; }
-    public bool diggable { get; set; }
-    public string material { get; set; } = string.Empty;
-    public bool transparent { get; set; }
-    public int emitLight { get; set; }
-    public int filterLight { get; set; }
-    public int defaultState { get; set; }
-    public int minStateId { get; set; }
-    public int maxStateId { get; set; }
-    public State[] states { get; set; } = [];
-    public int?[] drops { get; set; } = [];
-    public string boundingBox { get; set; } = string.Empty;
-    public HarvestTools harvestTools { get; set; } = default!;
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string DisplayName { get; set; } = string.Empty;
+    public float Hardness { get; set; }
+    public float Resistance { get; set; }
+    public int StackSize { get; set; }
+    public bool Diggable { get; set; }
+    public string Material { get; set; } = string.Empty;
+    public bool Transparent { get; set; }
+    public int EmitLight { get; set; }
+    public int FilterLight { get; set; }
+    public int DefaultState { get; set; }
+    public int MinStateId { get; set; }
+    public int MaxStateId { get; set; }
+    public State[] States { get; set; } = [];
+    public int?[] Drops { get; set; } = [];
+    public string BoundingBox { get; set; } = string.Empty;
+    public HarvestTools HarvestTools { get; set; } = default!;
 }
 
 public class HarvestTools
@@ -91,8 +87,8 @@ public class HarvestTools
 
 public class State
 {
-    public string name { get; set; } = string.Empty;
-    public string type { get; set; } = string.Empty;
-    public int num_values { get; set; }
-    public string[] values { get; set; } = [];
+    public string Name { get; set; } = string.Empty;
+    public string Type { get; set; } = string.Empty;
+    public int NumValues { get; set; }
+    public string[] Values { get; set; } = [];
 }

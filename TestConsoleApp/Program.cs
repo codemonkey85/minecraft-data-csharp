@@ -1,6 +1,6 @@
 ﻿var builder = Host.CreateDefaultBuilder(args);
 
-builder.ConfigureServices((hostingContext, services) => services
+builder.ConfigureServices((_, services) => services
     .AddScoped<IFileApi, FileApi>()
     .AddScoped<BlockRepository>()
     .AddScoped<EffectRepository>()
@@ -16,7 +16,7 @@ var itemRepository = host.Services.GetRequiredService<ItemRepository>();
 var items = await itemRepository.SearchItemsByName("diamond");
 
 foreach (var item in items
-    .Take(10))
+             .Take(10))
 {
-    Console.WriteLine($"{item.id} - {item.name}");
+    Console.WriteLine($"{item.Id} - {item.Name}");
 }
