@@ -6,7 +6,8 @@ public class BlockRepository(IFileApi fileApi)
 
     private List<Block> Blocks { get; set; } = [];
 
-    private async Task GetAllBlocks()
+    // ReSharper disable once MemberCanBePrivate.Global
+    public async Task GetAllBlocks()
     {
         if (Blocks.Count != 0)
         {

@@ -6,7 +6,8 @@ public class EnchantmentRepository(IFileApi fileApi)
 
     private List<Enchantment> Enchantments { get; set; } = [];
 
-    private async Task GetAllEnchantments()
+    // ReSharper disable once MemberCanBePrivate.Global
+    public async Task GetAllEnchantments()
     {
         if (Enchantments.Count != 0)
         {

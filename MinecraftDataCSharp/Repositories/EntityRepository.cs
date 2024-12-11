@@ -6,7 +6,8 @@ public class EntityRepository(IFileApi fileApi)
 
     private List<Entity> Entities { get; set; } = [];
 
-    private async Task GetAllEntities()
+    // ReSharper disable once MemberCanBePrivate.Global
+    public async Task GetAllEntities()
     {
         if (Entities.Count != 0)
         {
