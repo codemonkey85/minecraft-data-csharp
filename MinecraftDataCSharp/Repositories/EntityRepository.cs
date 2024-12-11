@@ -42,15 +42,16 @@ public class EntityRepository(IFileApi fileApi)
     }
 }
 
+[JsonSerializable(typeof(Entity))]
 public class Entity
 {
-    public int Id { get; set; }
-    public int InternalId { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string DisplayName { get; set; } = string.Empty;
-    public float Width { get; set; }
-    public float Height { get; set; }
-    public string Type { get; set; } = string.Empty;
-    public string Category { get; set; } = string.Empty;
-    public string[] MetadataKeys { get; set; } = [];
+    [JsonPropertyName("id")] public int Id { get; set; }
+    [JsonPropertyName("internalId")] public int InternalId { get; set; }
+    [JsonPropertyName("name")] public string Name { get; set; } = string.Empty;
+    [JsonPropertyName("displayName")] public string DisplayName { get; set; } = string.Empty;
+    [JsonPropertyName("width")] public float Width { get; set; }
+    [JsonPropertyName("height")] public float Height { get; set; }
+    [JsonPropertyName("type")] public string Type { get; set; } = string.Empty;
+    [JsonPropertyName("category")] public string Category { get; set; } = string.Empty;
+    [JsonPropertyName("metadataKeys")] public string[] MetadataKeys { get; set; } = [];
 }

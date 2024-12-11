@@ -42,28 +42,30 @@ public class BlockRepository(IFileApi fileApi)
     }
 }
 
+[JsonSerializable(typeof(Block))]
 public class Block
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string DisplayName { get; set; } = string.Empty;
-    public float Hardness { get; set; }
-    public float Resistance { get; set; }
-    public int StackSize { get; set; }
-    public bool Diggable { get; set; }
-    public string Material { get; set; } = string.Empty;
-    public bool Transparent { get; set; }
-    public int EmitLight { get; set; }
-    public int FilterLight { get; set; }
-    public int DefaultState { get; set; }
-    public int MinStateId { get; set; }
-    public int MaxStateId { get; set; }
-    public State[] States { get; set; } = [];
-    public int?[] Drops { get; set; } = [];
-    public string BoundingBox { get; set; } = string.Empty;
-    public HarvestTools HarvestTools { get; set; } = default!;
+    [JsonPropertyName("id")] public int Id { get; set; }
+    [JsonPropertyName("name")] public string Name { get; set; } = string.Empty;
+    [JsonPropertyName("displayName")] public string DisplayName { get; set; } = string.Empty;
+    [JsonPropertyName("hardness")] public float Hardness { get; set; }
+    [JsonPropertyName("resistance")] public float Resistance { get; set; }
+    [JsonPropertyName("stackSize")] public int StackSize { get; set; }
+    [JsonPropertyName("diggable")] public bool Diggable { get; set; }
+    [JsonPropertyName("material")] public string Material { get; set; } = string.Empty;
+    [JsonPropertyName("transparent")] public bool Transparent { get; set; }
+    [JsonPropertyName("emitLight")] public int EmitLight { get; set; }
+    [JsonPropertyName("filterLight")] public int FilterLight { get; set; }
+    [JsonPropertyName("defaultState")] public int DefaultState { get; set; }
+    [JsonPropertyName("minStateId")] public int MinStateId { get; set; }
+    [JsonPropertyName("maxStateId")] public int MaxStateId { get; set; }
+    [JsonPropertyName("states")] public State[] States { get; set; } = [];
+    [JsonPropertyName("drops")] public int?[] Drops { get; set; } = [];
+    [JsonPropertyName("boundingBox")] public string BoundingBox { get; set; } = string.Empty;
+    [JsonPropertyName("harvestTools")] public HarvestTools HarvestTools { get; set; } = default!;
 }
 
+[JsonSerializable(typeof(HarvestTools))]
 public class HarvestTools
 {
     public bool _779 { get; set; }
@@ -87,10 +89,11 @@ public class HarvestTools
     public bool _803 { get; set; }
 }
 
+[JsonSerializable(typeof(State))]
 public class State
 {
-    public string Name { get; set; } = string.Empty;
-    public string Type { get; set; } = string.Empty;
-    public int NumValues { get; set; }
-    public string[] Values { get; set; } = [];
+    [JsonPropertyName("id")] public string Name { get; set; } = string.Empty;
+    [JsonPropertyName("type")] public string Type { get; set; } = string.Empty;
+    [JsonPropertyName("num_values")] public int NumValues { get; set; }
+    [JsonPropertyName("values")] public string[] Values { get; set; } = [];
 }

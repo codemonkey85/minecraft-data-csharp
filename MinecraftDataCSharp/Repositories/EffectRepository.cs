@@ -44,13 +44,14 @@ public class EffectRepository(IFileApi fileApi)
     }
 }
 
+[JsonSerializable(typeof(Effect))]
 public partial class Effect
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string BedrockName => GetBedrockName();
-    public string DisplayName { get; set; } = string.Empty;
-    public string Type { get; set; } = string.Empty;
+    [JsonPropertyName("id")] public int Id { get; set; }
+    [JsonPropertyName("name")] public string Name { get; set; } = string.Empty;
+    [JsonPropertyName("bedrock_name")] public string BedrockName => GetBedrockName();
+    [JsonPropertyName("displayName")] public string DisplayName { get; set; } = string.Empty;
+    [JsonPropertyName("type")] public string Type { get; set; } = string.Empty;
 
     private string GetBedrockName() =>
         // convert from camelCase to snake_case
