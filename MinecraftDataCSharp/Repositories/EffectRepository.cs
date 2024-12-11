@@ -8,7 +8,8 @@ public class EffectRepository(IFileApi fileApi)
 
     private List<Effect> Effects { get; set; } = [];
 
-    private async Task GetAllEffects()
+    // ReSharper disable once MemberCanBePrivate.Global
+    public async Task GetAllEffects()
     {
         if (Effects.Count != 0)
         {

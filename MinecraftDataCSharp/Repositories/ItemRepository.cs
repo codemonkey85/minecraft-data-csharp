@@ -6,7 +6,8 @@ public class ItemRepository(IFileApi fileApi)
 
     private List<Item> Items { get; set; } = [];
 
-    private async Task GetAllItems()
+    // ReSharper disable once MemberCanBePrivate.Global
+    public async Task GetAllItems()
     {
         if (Items.Count != 0)
         {

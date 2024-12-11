@@ -6,7 +6,8 @@ public class BiomeRepository(IFileApi fileApi)
 
     private List<Biome> Biomes { get; set; } = [];
 
-    private async Task GetAllBiomes()
+    // ReSharper disable once MemberCanBePrivate.Global
+    public async Task GetAllBiomes()
     {
         if (Biomes.Count != 0)
         {
