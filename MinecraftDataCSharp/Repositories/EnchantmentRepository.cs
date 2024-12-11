@@ -12,7 +12,7 @@ public class EnchantmentRepository(IFileApi fileApi)
     {
         if (Enchantments.Count != 0)
         {
-            return [];
+            return Enchantments;
         }
 
         var fileText = await FileApi.ReadAllText(Constants.EnchantmentsFilePath);

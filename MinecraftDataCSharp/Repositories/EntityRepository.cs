@@ -12,7 +12,7 @@ public class EntityRepository(IFileApi fileApi)
     {
         if (Entities.Count != 0)
         {
-            return [];
+            return Entities;
         }
 
         var fileText = await FileApi.ReadAllText(Constants.EntitiesFilePath);

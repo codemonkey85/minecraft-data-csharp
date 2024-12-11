@@ -12,7 +12,7 @@ public class ItemRepository(IFileApi fileApi)
     {
         if (Items.Count != 0)
         {
-            return [];
+            return Items;
         }
 
         var fileText = await FileApi.ReadAllText(Constants.ItemsFilePath);

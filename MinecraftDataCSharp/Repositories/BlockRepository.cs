@@ -12,7 +12,7 @@ public class BlockRepository(IFileApi fileApi)
     {
         if (Blocks.Count != 0)
         {
-            return [];
+            return Blocks;
         }
 
         var fileText = await FileApi.ReadAllText(Constants.BlocksFilePath);

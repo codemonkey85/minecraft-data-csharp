@@ -12,7 +12,7 @@ public class BiomeRepository(IFileApi fileApi)
     {
         if (Biomes.Count != 0)
         {
-            return [];
+            return Biomes;
         }
 
         var fileText = await FileApi.ReadAllText(Constants.BiomesFilePath);
