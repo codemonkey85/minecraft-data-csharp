@@ -42,14 +42,18 @@ public class BiomeRepository(IFileApi fileApi)
     }
 }
 
+[JsonSerializable(typeof(Biome))]
 public class Biome
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string Category { get; set; } = string.Empty;
-    public float Temperature { get; set; }
+    [JsonPropertyName("id")] public int Id { get; set; }
+    [JsonPropertyName("name")] public string Name { get; set; } = string.Empty;
+    [JsonPropertyName("category")] public string Category { get; set; } = string.Empty;
+    [JsonPropertyName("temperature")] public float Temperature { get; set; }
+
+    [JsonPropertyName("has_precipitation")]
     public bool HasPrecipitation { get; set; }
-    public string Dimension { get; set; } = string.Empty;
-    public string DisplayName { get; set; } = string.Empty;
-    public int Color { get; set; }
+
+    [JsonPropertyName("dimension")] public string Dimension { get; set; } = string.Empty;
+    [JsonPropertyName("displayName")] public string DisplayName { get; set; } = string.Empty;
+    [JsonPropertyName("color")] public int Color { get; set; }
 }

@@ -42,13 +42,17 @@ public class ItemRepository(IFileApi fileApi)
     }
 }
 
+[JsonSerializable(typeof(Item))]
 public class Item
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string DisplayName { get; set; } = string.Empty;
-    public int StackSize { get; set; }
+    [JsonPropertyName("id")] public int Id { get; set; }
+    [JsonPropertyName("name")] public string Name { get; set; } = string.Empty;
+    [JsonPropertyName("displayName")] public string DisplayName { get; set; } = string.Empty;
+    [JsonPropertyName("stackSize")] public int StackSize { get; set; }
+
+    [JsonPropertyName("enchantCategories")]
     public string[] EnchantCategories { get; set; } = [];
-    public int MaxDurability { get; set; }
-    public string[] RepairWith { get; set; } = [];
+
+    [JsonPropertyName("maxDurability")] public int MaxDurability { get; set; }
+    [JsonPropertyName("repairWith")] public string[] RepairWith { get; set; } = [];
 }

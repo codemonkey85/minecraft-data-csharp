@@ -42,31 +42,34 @@ public class EnchantmentRepository(IFileApi fileApi)
     }
 }
 
+[JsonSerializable(typeof(Enchantment))]
 public class Enchantment
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string DisplayName { get; set; } = string.Empty;
-    public int MaxLevel { get; set; }
-    public Mincost MinCost { get; set; } = default!;
-    public Maxcost MaxCost { get; set; } = default!;
-    public bool TreasureOnly { get; set; }
-    public bool Curse { get; set; }
-    public string[] Exclude { get; set; } = [];
-    public string Category { get; set; } = string.Empty;
-    public int Weight { get; set; }
-    public bool Tradeable { get; set; }
-    public bool Discoverable { get; set; }
+    [JsonPropertyName("id")] public int Id { get; set; }
+    [JsonPropertyName("name")] public string Name { get; set; } = string.Empty;
+    [JsonPropertyName("displayName")] public string DisplayName { get; set; } = string.Empty;
+    [JsonPropertyName("maxLevel")] public int MaxLevel { get; set; }
+    [JsonPropertyName("minCost")] public Mincost MinCost { get; set; } = default!;
+    [JsonPropertyName("maxCost")] public Maxcost MaxCost { get; set; } = default!;
+    [JsonPropertyName("treasureOnly")] public bool TreasureOnly { get; set; }
+    [JsonPropertyName("curse")] public bool Curse { get; set; }
+    [JsonPropertyName("exclude")] public string[] Exclude { get; set; } = [];
+    [JsonPropertyName("category")] public string Category { get; set; } = string.Empty;
+    [JsonPropertyName("weight")] public int Weight { get; set; }
+    [JsonPropertyName("tradeable")] public bool Tradeable { get; set; }
+    [JsonPropertyName("discoverable")] public bool Discoverable { get; set; }
 }
 
+[JsonSerializable(typeof(Mincost))]
 public class Mincost
 {
-    public int A { get; set; }
-    public int B { get; set; }
+    [JsonPropertyName("a")] public int A { get; set; }
+    [JsonPropertyName("b")] public int B { get; set; }
 }
 
+[JsonSerializable(typeof(Maxcost))]
 public class Maxcost
 {
-    public int A { get; set; }
-    public int B { get; set; }
+    [JsonPropertyName("a")] public int A { get; set; }
+    [JsonPropertyName("b")] public int B { get; set; }
 }
