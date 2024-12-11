@@ -14,7 +14,7 @@ public class EffectRepository(IFileApi fileApi)
     {
         if (Effects.Count != 0)
         {
-            return [];
+            return Effects;
         }
 
         var fileText = await FileApi.ReadAllText(Constants.EffectsFilePath);
