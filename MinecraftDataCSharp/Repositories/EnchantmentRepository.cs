@@ -7,16 +7,17 @@ public class EnchantmentRepository(IFileApi fileApi)
     private List<Enchantment> Enchantments { get; set; } = [];
 
     // ReSharper disable once MemberCanBePrivate.Global
-    public async Task GetAllEnchantments()
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public async Task<List<Enchantment>> GetAllEnchantments()
     {
         if (Enchantments.Count != 0)
         {
-            return;
+            return [];
         }
 
         var fileText = await FileApi.ReadAllText(Constants.EnchantmentsFilePath);
 
-        Enchantments = JsonSerializer.Deserialize<List<Enchantment>>(fileText) ?? [];
+        return Enchantments = JsonSerializer.Deserialize<List<Enchantment>>(fileText) ?? [];
     }
 
     public async Task<Enchantment?> GetEnchantmentById(int id)

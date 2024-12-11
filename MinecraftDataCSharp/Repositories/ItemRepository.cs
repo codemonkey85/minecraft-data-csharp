@@ -7,16 +7,17 @@ public class ItemRepository(IFileApi fileApi)
     private List<Item> Items { get; set; } = [];
 
     // ReSharper disable once MemberCanBePrivate.Global
-    public async Task GetAllItems()
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public async Task<List<Item>> GetAllItems()
     {
         if (Items.Count != 0)
         {
-            return;
+            return [];
         }
 
         var fileText = await FileApi.ReadAllText(Constants.ItemsFilePath);
 
-        Items = JsonSerializer.Deserialize<List<Item>>(fileText) ?? [];
+        return Items = JsonSerializer.Deserialize<List<Item>>(fileText) ?? [];
     }
 
     public async Task<Item?> GetItemById(int id)

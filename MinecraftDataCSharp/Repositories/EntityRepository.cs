@@ -7,16 +7,17 @@ public class EntityRepository(IFileApi fileApi)
     private List<Entity> Entities { get; set; } = [];
 
     // ReSharper disable once MemberCanBePrivate.Global
-    public async Task GetAllEntities()
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public async Task<List<Entity>> GetAllEntities()
     {
         if (Entities.Count != 0)
         {
-            return;
+            return [];
         }
 
         var fileText = await FileApi.ReadAllText(Constants.EntitiesFilePath);
 
-        Entities = JsonSerializer.Deserialize<List<Entity>>(fileText) ?? [];
+        return Entities = JsonSerializer.Deserialize<List<Entity>>(fileText) ?? [];
     }
 
     public async Task<Entity?> GetEntityById(int id)
