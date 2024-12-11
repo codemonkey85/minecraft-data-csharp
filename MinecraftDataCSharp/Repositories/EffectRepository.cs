@@ -9,16 +9,17 @@ public class EffectRepository(IFileApi fileApi)
     private List<Effect> Effects { get; set; } = [];
 
     // ReSharper disable once MemberCanBePrivate.Global
-    public async Task GetAllEffects()
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public async Task<List<Effect>> GetAllEffects()
     {
         if (Effects.Count != 0)
         {
-            return;
+            return [];
         }
 
         var fileText = await FileApi.ReadAllText(Constants.EffectsFilePath);
 
-        Effects = JsonSerializer.Deserialize<List<Effect>>(fileText) ?? [];
+        return Effects = JsonSerializer.Deserialize<List<Effect>>(fileText) ?? [];
     }
 
     public async Task<Effect?> GetEffectById(int id)

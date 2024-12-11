@@ -7,16 +7,17 @@ public class BiomeRepository(IFileApi fileApi)
     private List<Biome> Biomes { get; set; } = [];
 
     // ReSharper disable once MemberCanBePrivate.Global
-    public async Task GetAllBiomes()
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public async Task<List<Biome>> GetAllBiomes()
     {
         if (Biomes.Count != 0)
         {
-            return;
+            return [];
         }
 
         var fileText = await FileApi.ReadAllText(Constants.BiomesFilePath);
 
-        Biomes = JsonSerializer.Deserialize<List<Biome>>(fileText) ?? [];
+        return Biomes = JsonSerializer.Deserialize<List<Biome>>(fileText) ?? [];
     }
 
     public async Task<Biome?> GetBiomeById(int id)

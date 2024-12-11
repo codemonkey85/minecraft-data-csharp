@@ -7,16 +7,17 @@ public class BlockRepository(IFileApi fileApi)
     private List<Block> Blocks { get; set; } = [];
 
     // ReSharper disable once MemberCanBePrivate.Global
-    public async Task GetAllBlocks()
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public async Task<List<Block>> GetAllBlocks()
     {
         if (Blocks.Count != 0)
         {
-            return;
+            return [];
         }
 
         var fileText = await FileApi.ReadAllText(Constants.BlocksFilePath);
 
-        Blocks = JsonSerializer.Deserialize<List<Block>>(fileText) ?? [];
+        return Blocks = JsonSerializer.Deserialize<List<Block>>(fileText) ?? [];
     }
 
     public async Task<Block?> GetBlockById(int id)
