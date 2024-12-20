@@ -47,7 +47,7 @@ public class BiomeRepository(IFileApi fileApi)
     }
 }
 
-[JsonSerializable(typeof(Biome))]
+[JsonSerializable(typeof(List<Biome>))]
 // ReSharper disable once ClassNeverInstantiated.Global
 internal partial class BiomeJsonContext : JsonSerializerContext;
 

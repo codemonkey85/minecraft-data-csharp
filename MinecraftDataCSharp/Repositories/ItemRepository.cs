@@ -47,7 +47,7 @@ public class ItemRepository(IFileApi fileApi)
     }
 }
 
-[JsonSerializable(typeof(Item))]
+[JsonSerializable(typeof(List<Item>))]
 // ReSharper disable once ClassNeverInstantiated.Global
 internal partial class ItemJsonContext : JsonSerializerContext;
 

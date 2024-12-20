@@ -49,7 +49,7 @@ public class EffectRepository(IFileApi fileApi)
     }
 }
 
-[JsonSerializable(typeof(Effect))]
+[JsonSerializable(typeof(List<Effect>))]
 // ReSharper disable once ClassNeverInstantiated.Global
 internal partial class EffectJsonContext : JsonSerializerContext;
 

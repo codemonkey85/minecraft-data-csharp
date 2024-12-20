@@ -47,7 +47,7 @@ public class EnchantmentRepository(IFileApi fileApi)
     }
 }
 
-[JsonSerializable(typeof(Enchantment))]
+[JsonSerializable(typeof(List<Enchantment>))]
 // ReSharper disable once ClassNeverInstantiated.Global
 internal partial class EnchantmentJsonContext : JsonSerializerContext;
 
