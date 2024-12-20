@@ -6,6 +6,11 @@ public class BiomeRepository(IFileApi fileApi)
 
     private List<Biome> Biomes { get; set; } = [];
 
+    private static readonly JsonSerializerOptions JsonSerializerOptions = new()
+    {
+        TypeInfoResolver = BiomeJsonContext.Default
+    };
+
     // ReSharper disable once MemberCanBePrivate.Global
     // ReSharper disable once UnusedMethodReturnValue.Global
     public async Task<List<Biome>> GetAllBiomes()
@@ -17,7 +22,7 @@ public class BiomeRepository(IFileApi fileApi)
 
         var fileText = await FileApi.ReadAllText(Constants.BiomesFilePath);
 
-        return Biomes = JsonSerializer.Deserialize<List<Biome>>(fileText) ?? [];
+        return Biomes = JsonSerializer.Deserialize<List<Biome>>(fileText, JsonSerializerOptions) ?? [];
     }
 
     public async Task<Biome?> GetBiomeById(int id)
@@ -42,7 +47,10 @@ public class BiomeRepository(IFileApi fileApi)
     }
 }
 
-[JsonSerializable(typeof(Biome))]
+[JsonSerializable(typeof(List<Biome>))]
+// ReSharper disable once ClassNeverInstantiated.Global
+internal partial class BiomeJsonContext : JsonSerializerContext;
+
 public class Biome
 {
     [JsonPropertyName("id")] public int Id { get; set; }
