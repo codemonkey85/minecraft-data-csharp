@@ -6,6 +6,11 @@ public class BlockRepository(IFileApi fileApi)
 
     private List<Block> Blocks { get; set; } = [];
 
+    private static readonly JsonSerializerOptions JsonSerializerOptions = new()
+    {
+        TypeInfoResolver = BlockJsonContext.Default
+    };
+
     // ReSharper disable once MemberCanBePrivate.Global
     // ReSharper disable once UnusedMethodReturnValue.Global
     public async Task<List<Block>> GetAllBlocks()
@@ -17,7 +22,7 @@ public class BlockRepository(IFileApi fileApi)
 
         var fileText = await FileApi.ReadAllText(Constants.BlocksFilePath);
 
-        return Blocks = JsonSerializer.Deserialize<List<Block>>(fileText) ?? [];
+        return Blocks = JsonSerializer.Deserialize<List<Block>>(fileText, JsonSerializerOptions) ?? [];
     }
 
     public async Task<Block?> GetBlockById(int id)
@@ -43,6 +48,9 @@ public class BlockRepository(IFileApi fileApi)
 }
 
 [JsonSerializable(typeof(Block))]
+// ReSharper disable once ClassNeverInstantiated.Global
+internal partial class BlockJsonContext : JsonSerializerContext;
+
 public class Block
 {
     [JsonPropertyName("id")] public int Id { get; set; }
@@ -62,10 +70,9 @@ public class Block
     [JsonPropertyName("states")] public State[] States { get; set; } = [];
     [JsonPropertyName("drops")] public int?[] Drops { get; set; } = [];
     [JsonPropertyName("boundingBox")] public string BoundingBox { get; set; } = string.Empty;
-    [JsonPropertyName("harvestTools")] public HarvestTools HarvestTools { get; set; } = default!;
+    [JsonPropertyName("harvestTools")] public HarvestTools HarvestTools { get; set; } = null!;
 }
 
-[JsonSerializable(typeof(HarvestTools))]
 public class HarvestTools
 {
     public bool _779 { get; set; }
@@ -89,7 +96,6 @@ public class HarvestTools
     public bool _803 { get; set; }
 }
 
-[JsonSerializable(typeof(State))]
 public class State
 {
     [JsonPropertyName("id")] public string Name { get; set; } = string.Empty;

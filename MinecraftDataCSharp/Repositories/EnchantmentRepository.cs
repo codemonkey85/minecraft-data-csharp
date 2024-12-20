@@ -6,6 +6,11 @@ public class EnchantmentRepository(IFileApi fileApi)
 
     private List<Enchantment> Enchantments { get; set; } = [];
 
+    private static readonly JsonSerializerOptions JsonSerializerOptions = new()
+    {
+        TypeInfoResolver = EnchantmentJsonContext.Default
+    };
+
     // ReSharper disable once MemberCanBePrivate.Global
     // ReSharper disable once UnusedMethodReturnValue.Global
     public async Task<List<Enchantment>> GetAllEnchantments()
@@ -17,7 +22,7 @@ public class EnchantmentRepository(IFileApi fileApi)
 
         var fileText = await FileApi.ReadAllText(Constants.EnchantmentsFilePath);
 
-        return Enchantments = JsonSerializer.Deserialize<List<Enchantment>>(fileText) ?? [];
+        return Enchantments = JsonSerializer.Deserialize<List<Enchantment>>(fileText, JsonSerializerOptions) ?? [];
     }
 
     public async Task<Enchantment?> GetEnchantmentById(int id)
@@ -43,14 +48,17 @@ public class EnchantmentRepository(IFileApi fileApi)
 }
 
 [JsonSerializable(typeof(Enchantment))]
+// ReSharper disable once ClassNeverInstantiated.Global
+internal partial class EnchantmentJsonContext : JsonSerializerContext;
+
 public class Enchantment
 {
     [JsonPropertyName("id")] public int Id { get; set; }
     [JsonPropertyName("name")] public string Name { get; set; } = string.Empty;
     [JsonPropertyName("displayName")] public string DisplayName { get; set; } = string.Empty;
     [JsonPropertyName("maxLevel")] public int MaxLevel { get; set; }
-    [JsonPropertyName("minCost")] public Mincost MinCost { get; set; } = default!;
-    [JsonPropertyName("maxCost")] public Maxcost MaxCost { get; set; } = default!;
+    [JsonPropertyName("minCost")] public Mincost MinCost { get; set; } = null!;
+    [JsonPropertyName("maxCost")] public Maxcost MaxCost { get; set; } = null!;
     [JsonPropertyName("treasureOnly")] public bool TreasureOnly { get; set; }
     [JsonPropertyName("curse")] public bool Curse { get; set; }
     [JsonPropertyName("exclude")] public string[] Exclude { get; set; } = [];
@@ -60,14 +68,12 @@ public class Enchantment
     [JsonPropertyName("discoverable")] public bool Discoverable { get; set; }
 }
 
-[JsonSerializable(typeof(Mincost))]
 public class Mincost
 {
     [JsonPropertyName("a")] public int A { get; set; }
     [JsonPropertyName("b")] public int B { get; set; }
 }
 
-[JsonSerializable(typeof(Maxcost))]
 public class Maxcost
 {
     [JsonPropertyName("a")] public int A { get; set; }

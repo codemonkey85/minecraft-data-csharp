@@ -8,6 +8,11 @@ public class EffectRepository(IFileApi fileApi)
 
     private List<Effect> Effects { get; set; } = [];
 
+    private static readonly JsonSerializerOptions JsonSerializerOptions = new()
+    {
+        TypeInfoResolver = EffectJsonContext.Default
+    };
+
     // ReSharper disable once MemberCanBePrivate.Global
     // ReSharper disable once UnusedMethodReturnValue.Global
     public async Task<List<Effect>> GetAllEffects()
@@ -19,7 +24,7 @@ public class EffectRepository(IFileApi fileApi)
 
         var fileText = await FileApi.ReadAllText(Constants.EffectsFilePath);
 
-        return Effects = JsonSerializer.Deserialize<List<Effect>>(fileText) ?? [];
+        return Effects = JsonSerializer.Deserialize<List<Effect>>(fileText, JsonSerializerOptions) ?? [];
     }
 
     public async Task<Effect?> GetEffectById(int id)
@@ -45,6 +50,9 @@ public class EffectRepository(IFileApi fileApi)
 }
 
 [JsonSerializable(typeof(Effect))]
+// ReSharper disable once ClassNeverInstantiated.Global
+internal partial class EffectJsonContext : JsonSerializerContext;
+
 public partial class Effect
 {
     [JsonPropertyName("id")] public int Id { get; set; }

@@ -6,6 +6,11 @@ public class ItemRepository(IFileApi fileApi)
 
     private List<Item> Items { get; set; } = [];
 
+    private static readonly JsonSerializerOptions JsonSerializerOptions = new()
+    {
+        TypeInfoResolver = ItemJsonContext.Default
+    };
+
     // ReSharper disable once MemberCanBePrivate.Global
     // ReSharper disable once UnusedMethodReturnValue.Global
     public async Task<List<Item>> GetAllItems()
@@ -17,7 +22,7 @@ public class ItemRepository(IFileApi fileApi)
 
         var fileText = await FileApi.ReadAllText(Constants.ItemsFilePath);
 
-        return Items = JsonSerializer.Deserialize<List<Item>>(fileText) ?? [];
+        return Items = JsonSerializer.Deserialize<List<Item>>(fileText, JsonSerializerOptions) ?? [];
     }
 
     public async Task<Item?> GetItemById(int id)
@@ -43,6 +48,9 @@ public class ItemRepository(IFileApi fileApi)
 }
 
 [JsonSerializable(typeof(Item))]
+// ReSharper disable once ClassNeverInstantiated.Global
+internal partial class ItemJsonContext : JsonSerializerContext;
+
 public class Item
 {
     [JsonPropertyName("id")] public int Id { get; set; }

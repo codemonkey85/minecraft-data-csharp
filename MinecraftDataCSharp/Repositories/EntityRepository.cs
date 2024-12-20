@@ -6,6 +6,11 @@ public class EntityRepository(IFileApi fileApi)
 
     private List<Entity> Entities { get; set; } = [];
 
+    private static readonly JsonSerializerOptions JsonSerializerOptions = new()
+    {
+        TypeInfoResolver = EntityJsonContext.Default
+    };
+
     // ReSharper disable once MemberCanBePrivate.Global
     // ReSharper disable once UnusedMethodReturnValue.Global
     public async Task<List<Entity>> GetAllEntities()
@@ -17,7 +22,7 @@ public class EntityRepository(IFileApi fileApi)
 
         var fileText = await FileApi.ReadAllText(Constants.EntitiesFilePath);
 
-        return Entities = JsonSerializer.Deserialize<List<Entity>>(fileText) ?? [];
+        return Entities = JsonSerializer.Deserialize<List<Entity>>(fileText, JsonSerializerOptions) ?? [];
     }
 
     public async Task<Entity?> GetEntityById(int id)
@@ -43,6 +48,9 @@ public class EntityRepository(IFileApi fileApi)
 }
 
 [JsonSerializable(typeof(Entity))]
+// ReSharper disable once ClassNeverInstantiated.Global
+internal partial class EntityJsonContext : JsonSerializerContext;
+
 public class Entity
 {
     [JsonPropertyName("id")] public int Id { get; set; }
