@@ -3,18 +3,20 @@
 public class MinecraftDataManager(DataPathResolver pathResolver)
 {
     private readonly DataPathResolver pathResolver = pathResolver;
-    private string edition = Constants.DefaultEdition;
-    private string version = Constants.DefaultPcVersion;
+    
+    public string Edition { get; private set; } = Constants.DefaultEdition;
 
-    public void SetVersion(string newVersion) => version = newVersion;
+    public string Version { get; private set; } = Constants.DefaultPcVersion;
+
+    public void SetVersion(string newVersion) => Version = newVersion;
 
     public void SetEdition(string newEdition)
     {
-        edition = newEdition;
-        version = newEdition == "pc"
+        Edition = newEdition;
+        Version = newEdition == "pc"
             ? Constants.DefaultPcVersion
             : Constants.DefaultBedrockVersion; // Default per edition
     }
 
-    public string? GetFilePath(string category) => pathResolver.GetFilePath(edition, version, category);
+    public string? GetFilePath(string category) => pathResolver.GetFilePath(Edition, Version, category);
 }
