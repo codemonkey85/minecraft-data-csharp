@@ -38,9 +38,11 @@ public class EnchantmentRepository(IFileApi fileApi, MinecraftDataManager dataMa
     public async Task<List<Enchantment>> SearchEnchantmentsByName(string name)
     {
         await GetAllEnchantments();
-        return Enchantments.Where(enchantment =>
+        return
+        [
+            .. Enchantments.Where(enchantment =>
                 enchantment.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
-            .ToList();
+        ];
     }
 }
 

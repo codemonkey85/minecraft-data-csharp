@@ -38,9 +38,11 @@ public class ItemRepository(IFileApi fileApi, MinecraftDataManager dataManager)
     public async Task<List<Item>> SearchItemsByName(string name)
     {
         await GetAllItems();
-        return Items.Where(item =>
+        return
+        [
+            .. Items.Where(item =>
                 item.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
-            .ToList();
+        ];
     }
 }
 

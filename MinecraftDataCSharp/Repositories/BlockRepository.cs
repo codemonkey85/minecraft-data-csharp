@@ -38,9 +38,11 @@ public class BlockRepository(IFileApi fileApi, MinecraftDataManager dataManager)
     public async Task<List<Block>> SearchBlocksByName(string name)
     {
         await GetAllBlocks();
-        return Blocks.Where(block =>
+        return
+        [
+            .. Blocks.Where(block =>
                 block.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
-            .ToList();
+        ];
     }
 }
 

@@ -38,9 +38,11 @@ public class EntityRepository(IFileApi fileApi, MinecraftDataManager dataManager
     public async Task<List<Entity>> SearchEntitiesByName(string name)
     {
         await GetAllEntities();
-        return Entities.Where(entity =>
+        return
+        [
+            .. Entities.Where(entity =>
                 entity.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
-            .ToList();
+        ];
     }
 }
 
