@@ -5,7 +5,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 services
-    .AddSingleton(_ => new DataPathResolver(Constants.DataPathsJson)) // Singleton (shared across the app)
+    .AddSingleton<DataPathResolver>() // Singleton (shared across the app)
     .AddScoped<MinecraftDataManager>() // Scoped (per request or session)
     .AddScoped<IFileApi, WebFileApi>()
     .AddScoped<BlockRepository>()
@@ -16,4 +16,14 @@ services
     .AddScoped<EnchantmentRepository>()
     .AddScoped(_ => new HttpClient { BaseAddress = new(builder.HostEnvironment.BaseAddress) });
 
-await builder.Build().RunAsync();
+var app = builder.Build();
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var appServices = serviceScope.ServiceProvider;
+
+    var pathResolver = appServices.GetRequiredService<DataPathResolver>();
+    await pathResolver.Initialize();
+}
+
+await app.RunAsync();

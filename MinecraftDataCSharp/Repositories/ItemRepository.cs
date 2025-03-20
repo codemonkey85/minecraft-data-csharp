@@ -14,11 +14,6 @@ public class ItemRepository(IFileApi fileApi, MinecraftDataManager dataManager)
     // ReSharper disable once UnusedMethodReturnValue.Global
     public async Task<List<Item>> GetAllItems()
     {
-        if (Items.Count != 0)
-        {
-            return Items;
-        }
-
         var filePath = DataManager.GetFilePath(Constants.ItemsFilePath)
                        ?? throw new FileNotFoundException("Items file path not found for the selected version.");
 

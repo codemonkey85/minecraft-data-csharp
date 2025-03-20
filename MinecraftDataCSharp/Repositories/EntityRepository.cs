@@ -14,11 +14,6 @@ public class EntityRepository(IFileApi fileApi, MinecraftDataManager dataManager
     // ReSharper disable once UnusedMethodReturnValue.Global
     public async Task<List<Entity>> GetAllEntities()
     {
-        if (Entities.Count != 0)
-        {
-            return Entities;
-        }
-
         var filePath = DataManager.GetFilePath(Constants.EntitiesFilePath)
                        ?? throw new FileNotFoundException("Items file path not found for the selected version.");
 

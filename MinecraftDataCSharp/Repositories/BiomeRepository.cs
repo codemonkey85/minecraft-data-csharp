@@ -14,11 +14,6 @@ public class BiomeRepository(IFileApi fileApi, MinecraftDataManager dataManager)
     // ReSharper disable once UnusedMethodReturnValue.Global
     public async Task<List<Biome>> GetAllBiomes()
     {
-        if (Biomes.Count != 0)
-        {
-            return Biomes;
-        }
-
         var filePath = DataManager.GetFilePath(Constants.BiomesFilePath)
                        ?? throw new FileNotFoundException("Items file path not found for the selected version.");
 

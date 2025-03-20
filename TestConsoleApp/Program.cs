@@ -1,7 +1,7 @@
 ﻿var builder = Host.CreateDefaultBuilder(args);
 
 builder.ConfigureServices((_, services) => services
-    .AddSingleton(_ => new DataPathResolver(Constants.DataPathsJson)) // Singleton (shared across the app)
+    .AddSingleton<DataPathResolver>() // Singleton (shared across the app)
     .AddScoped<MinecraftDataManager>() // Scoped (per request or session)
     .AddScoped<IFileApi, FileApi>()
     .AddScoped<BlockRepository>()
@@ -13,13 +13,29 @@ builder.ConfigureServices((_, services) => services
 
 using var host = builder.Build();
 
+var pathResolver = host.Services.GetRequiredService<DataPathResolver>();
+await pathResolver.Initialize();
+
 var minecraftDataManager = host.Services.GetRequiredService<MinecraftDataManager>();
 var itemRepository = host.Services.GetRequiredService<ItemRepository>();
 
 minecraftDataManager.SetEdition("pc");
-minecraftDataManager.SetVersion("1.16");
+minecraftDataManager.SetVersion("1.14");
 
 var items = await itemRepository.SearchItemsByName("nether");
+
+foreach (var item in items
+             .Take(100))
+{
+    Console.WriteLine($"{item.Id} - {item.Name}");
+}
+
+Console.WriteLine();
+
+minecraftDataManager.SetEdition("pc");
+minecraftDataManager.SetVersion("1.16");
+
+items = await itemRepository.SearchItemsByName("nether");
 
 foreach (var item in items
              .Take(100))

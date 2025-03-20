@@ -16,7 +16,7 @@
         <PackageTags>minecraft;csharp;</PackageTags>
         <PackageReleaseNotes>Initial release</PackageReleaseNotes>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <Version>2.0.0.0-prerelease</Version>
+        <Version>2.0.0.0-prerelease-2</Version>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
@@ -48,7 +48,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <AdditionalFiles Include="data\data\dataPaths.json"/>
+        <AdditionalFiles Include="data\data\dataPaths.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
     </ItemGroup>
 
 </Project>
