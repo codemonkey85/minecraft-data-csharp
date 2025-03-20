@@ -14,11 +14,6 @@ public class EnchantmentRepository(IFileApi fileApi, MinecraftDataManager dataMa
     // ReSharper disable once UnusedMethodReturnValue.Global
     public async Task<List<Enchantment>> GetAllEnchantments()
     {
-        if (Enchantments.Count != 0)
-        {
-            return Enchantments;
-        }
-
         var filePath = DataManager.GetFilePath(Constants.EnchantmentsFilePath)
                        ?? throw new FileNotFoundException("Items file path not found for the selected version.");
 

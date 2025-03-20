@@ -14,11 +14,6 @@ public class BlockRepository(IFileApi fileApi, MinecraftDataManager dataManager)
     // ReSharper disable once UnusedMethodReturnValue.Global
     public async Task<List<Block>> GetAllBlocks()
     {
-        if (Blocks.Count != 0)
-        {
-            return Blocks;
-        }
-
         var filePath = DataManager.GetFilePath(Constants.BlocksFilePath)
                        ?? throw new FileNotFoundException("Items file path not found for the selected version.");
 

@@ -16,11 +16,6 @@ public class EffectRepository(IFileApi fileApi, MinecraftDataManager dataManager
     // ReSharper disable once UnusedMethodReturnValue.Global
     public async Task<List<Effect>> GetAllEffects()
     {
-        if (Effects.Count != 0)
-        {
-            return Effects;
-        }
-
         var filePath = DataManager.GetFilePath(Constants.EffectsFilePath)
                        ?? throw new FileNotFoundException("Items file path not found for the selected version.");
 
