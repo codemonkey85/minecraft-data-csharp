@@ -40,9 +40,11 @@ public class EffectRepository(IFileApi fileApi, MinecraftDataManager dataManager
     public async Task<List<Effect>> SearchEffectsByName(string name)
     {
         await GetAllEffects();
-        return Effects.Where(effect =>
+        return
+        [
+            .. Effects.Where(effect =>
                 effect.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
-            .ToList();
+        ];
     }
 }
 

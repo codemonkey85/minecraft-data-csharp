@@ -38,9 +38,11 @@ public class BiomeRepository(IFileApi fileApi, MinecraftDataManager dataManager)
     public async Task<List<Biome>> SearchBiomesByName(string name)
     {
         await GetAllBiomes();
-        return Biomes.Where(biome =>
+        return
+        [
+            .. Biomes.Where(biome =>
                 biome.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
-            .ToList();
+        ];
     }
 }
 
