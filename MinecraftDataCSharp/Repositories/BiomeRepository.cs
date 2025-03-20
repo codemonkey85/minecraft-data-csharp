@@ -1,15 +1,14 @@
 ﻿namespace MinecraftDataCSharp.Repositories;
 
-public class BiomeRepository(IFileApi fileApi)
+public class BiomeRepository(IFileApi fileApi, MinecraftDataManager dataManager)
 {
+    private static readonly JsonSerializerOptions JsonSerializerOptions = new() { TypeInfoResolver = BiomeJsonContext.Default };
+
     private IFileApi FileApi { get; } = fileApi;
 
-    private List<Biome> Biomes { get; set; } = [];
+    private MinecraftDataManager DataManager { get; } = dataManager;
 
-    private static readonly JsonSerializerOptions JsonSerializerOptions = new()
-    {
-        TypeInfoResolver = BiomeJsonContext.Default
-    };
+    private List<Biome> Biomes { get; set; } = [];
 
     // ReSharper disable once MemberCanBePrivate.Global
     // ReSharper disable once UnusedMethodReturnValue.Global
@@ -20,7 +19,10 @@ public class BiomeRepository(IFileApi fileApi)
             return Biomes;
         }
 
-        var fileText = await FileApi.ReadAllText(Constants.BiomesFilePath);
+        var filePath = DataManager.GetFilePath(Constants.BiomesFilePath)
+                       ?? throw new FileNotFoundException("Items file path not found for the selected version.");
+
+        var fileText = await FileApi.ReadAllText(filePath);
 
         return Biomes = JsonSerializer.Deserialize<List<Biome>>(fileText, JsonSerializerOptions) ?? [];
     }
@@ -53,15 +55,27 @@ internal partial class BiomeJsonContext : JsonSerializerContext;
 
 public class Biome
 {
-    [JsonPropertyName("id")] public int Id { get; set; }
-    [JsonPropertyName("name")] public string Name { get; set; } = string.Empty;
-    [JsonPropertyName("category")] public string Category { get; set; } = string.Empty;
-    [JsonPropertyName("temperature")] public float Temperature { get; set; }
+    [JsonPropertyName("id")]
+    public int Id { get; set; }
+
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = string.Empty;
+
+    [JsonPropertyName("category")]
+    public string Category { get; set; } = string.Empty;
+
+    [JsonPropertyName("temperature")]
+    public float Temperature { get; set; }
 
     [JsonPropertyName("has_precipitation")]
     public bool HasPrecipitation { get; set; }
 
-    [JsonPropertyName("dimension")] public string Dimension { get; set; } = string.Empty;
-    [JsonPropertyName("displayName")] public string DisplayName { get; set; } = string.Empty;
-    [JsonPropertyName("color")] public int Color { get; set; }
+    [JsonPropertyName("dimension")]
+    public string Dimension { get; set; } = string.Empty;
+
+    [JsonPropertyName("displayName")]
+    public string DisplayName { get; set; } = string.Empty;
+
+    [JsonPropertyName("color")]
+    public int Color { get; set; }
 }

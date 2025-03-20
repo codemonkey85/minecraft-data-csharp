@@ -1,50 +1,54 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Title>minecraft-data-csharp</Title>
-		<Authors>codemonkey85</Authors>
-		<Description>A C# wrapper for PrismarineJS/minecraft-data</Description>
-		<Copyright>Copyright 2023</Copyright>
-		<PackageProjectUrl>https://github.com/codemonkey85/minecraft-data-csharp</PackageProjectUrl>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://github.com/codemonkey85/minecraft-data-csharp</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-		<PackageTags>minecraft;csharp;</PackageTags>
-		<PackageReleaseNotes>Initial release</PackageReleaseNotes>
-		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<Version>1.2.1.9</Version>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <Title>minecraft-data-csharp</Title>
+        <Authors>codemonkey85</Authors>
+        <Description>A C# wrapper for PrismarineJS/minecraft-data</Description>
+        <Copyright>Copyright 2023</Copyright>
+        <PackageProjectUrl>https://github.com/codemonkey85/minecraft-data-csharp</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryUrl>https://github.com/codemonkey85/minecraft-data-csharp</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>minecraft;csharp;</PackageTags>
+        <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <Version>2.0.0.0</Version>
+    </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-	</PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<None Include="..\LICENSE">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-		<None Include="..\README.md">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
+    <ItemGroup>
+        <None Include="..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
 
-	<ItemGroup>
-		<None Include="data\data\**">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
+    <ItemGroup>
+        <None Include="data\data\**">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
 
-	<ItemGroup>
-		<Content Include="data\data\**">
-			<Pack>true</Pack>
-			<PackagePath>content\data\data\</PackagePath>
-		</Content>
-	</ItemGroup>
+    <ItemGroup>
+        <Content Include="data\data\**">
+            <Pack>true</Pack>
+            <PackagePath>content\data\data\</PackagePath>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <AdditionalFiles Include="data\data\dataPaths.json"/>
+    </ItemGroup>
 
 </Project>
