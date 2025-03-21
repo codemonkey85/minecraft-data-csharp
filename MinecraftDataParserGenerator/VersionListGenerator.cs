@@ -61,37 +61,25 @@ namespace MinecraftDataParserGenerator
             });
         }
 
-        private static string ConvertToPascalCase(string input)
+        private static string ConvertToPascalCase(string input) => string.IsNullOrEmpty(input)
+            ? string.Empty
+            : char.ToUpper(input[0]) + input.Substring(1).ToLower();
+
+        private static List<string> ParseVersionsJson(string json)
         {
-            if (string.IsNullOrEmpty(input))
-            {
-                return string.Empty;
-            }
-
-            return char.ToUpper(input[0]) + input.Substring(1).ToLower();
-        }
-
-        private List<string> ParseVersionsJson(string json)
-        {
-            var versions = new List<string>();
-
             // Remove brackets
             json = json.Trim().TrimStart('[').TrimEnd(']');
 
             // Split by commas and remove quotes
-            foreach (var item in json.Split(','))
-            {
-                var version = item.Trim().Trim('"');
-                if (!string.IsNullOrEmpty(version))
-                {
-                    versions.Add(version);
-                }
-            }
 
-            return versions;
+            return json
+                .Split(',')
+                .Select(item => item.Trim().Trim('"'))
+                .Where(version => !string.IsNullOrEmpty(version))
+                .ToList();
         }
 
-        private string GenerateVersionClass(string className, List<string> versions)
+        private static string GenerateVersionClass(string className, List<string> versions)
         {
             var sb = new StringBuilder();
 
@@ -135,7 +123,7 @@ namespace MinecraftDataParserGenerator
             return name;
         }
 
-        private string GenerateEditionsClass(IEnumerable<string> editions)
+        private static string GenerateEditionsClass(IEnumerable<string> editions)
         {
             var sb = new StringBuilder();
 
@@ -158,14 +146,20 @@ namespace MinecraftDataParserGenerator
 
         private static string GetEditionFromPath(string filePath)
         {
+            // Extract the folder name dynamically
             var parts = filePath.Split(Path.DirectorySeparatorChar);
 
-            return (
-                from part in parts
-                where part.Equals("pc", StringComparison.OrdinalIgnoreCase)
-                      || part.Equals("bedrock", StringComparison.OrdinalIgnoreCase)
-                select part.ToLower()
-            ).FirstOrDefault();
+            // Assuming the folder structure is like: ".../pc/common/versions.json"
+            // We take the folder that contains "common"
+            for (var i = 0; i < parts.Length - 1; i++)
+            {
+                if (parts[i].Equals("common", StringComparison.OrdinalIgnoreCase))
+                {
+                    return parts[i - 1].ToLower(); // The parent folder should be the edition
+                }
+            }
+
+            return null; // If no valid edition is found
         }
     }
 }
