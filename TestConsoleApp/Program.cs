@@ -1,4 +1,6 @@
-﻿var builder = Host.CreateDefaultBuilder(args);
+﻿using MinecraftData;
+
+var builder = Host.CreateDefaultBuilder(args);
 
 builder.ConfigureServices((_, services) => services
     .AddSingleton<DataPathResolver>() // Singleton (shared across the app)
@@ -20,7 +22,7 @@ var minecraftDataManager = host.Services.GetRequiredService<MinecraftDataManager
 var itemRepository = host.Services.GetRequiredService<ItemRepository>();
 
 minecraftDataManager.SetEdition("pc");
-minecraftDataManager.SetVersion("1.14");
+minecraftDataManager.SetVersion(PcVersions.V1_14);
 
 var items = await itemRepository.SearchItemsByName("nether");
 
@@ -33,7 +35,7 @@ foreach (var item in items
 Console.WriteLine();
 
 minecraftDataManager.SetEdition("pc");
-minecraftDataManager.SetVersion("1.16");
+minecraftDataManager.SetVersion(PcVersions.V1_16);
 
 items = await itemRepository.SearchItemsByName("nether");
 
