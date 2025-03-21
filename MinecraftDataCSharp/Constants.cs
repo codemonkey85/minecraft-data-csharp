@@ -2,12 +2,6 @@
 
 public static class Constants
 {
-    public const string DefaultEdition = Editions.Pc;
-
-    public const string DefaultPcVersion = PcVersions.Latest;
-
-    public const string DefaultBedrockVersion = BedrockVersions.Latest;
-
     public const string DataPath = "data/data/";
 
     public const string DataPathsJson = $"{DataPath}dataPaths.json";
@@ -23,11 +17,4 @@ public static class Constants
     public const string EntitiesFilePath = "entities";
 
     public const string EnchantmentsFilePath = "enchantments";
-}
-
-public static class Editions
-{
-    public const string Pc = "pc";
-
-    public const string Bedrock = "bedrock";
 }
