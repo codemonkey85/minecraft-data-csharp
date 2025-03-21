@@ -2,9 +2,8 @@
 
 public class DataPathResolver(IServiceProvider serviceProvider)
 {
-    private IServiceProvider ServiceProvider { get; set; } = serviceProvider;
-
-    private Dictionary<string, Dictionary<string, Dictionary<string, string>>> _dataPaths = [];
+    private Dictionary<string, Dictionary<string, Dictionary<string, string>>> dataPaths = [];
+    private IServiceProvider ServiceProvider { get; } = serviceProvider;
 
     public async Task Initialize()
     {
@@ -12,13 +11,13 @@ public class DataPathResolver(IServiceProvider serviceProvider)
         var fileApi = scope.ServiceProvider.GetRequiredService<IFileApi>();
 
         var json = await fileApi.ReadAllText(Constants.DataPathsJson);
-        _dataPaths = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(json)
-                     ?? throw new Exception("Failed to parse dataPaths.json");
+        dataPaths = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(json)
+                    ?? throw new Exception("Failed to parse dataPaths.json");
     }
 
-    public string? GetFilePath(string edition, string version, string category) => _dataPaths.TryGetValue(edition, out var versions) &&
-            versions.TryGetValue(version, out var categories) &&
-            categories.TryGetValue(category, out var path)
-            ? $"{Constants.DataPath}/{path}/{category}.json"
-            : null;
+    public string? GetFilePath(string edition, string version, string category) => dataPaths.TryGetValue(edition, out var versions) &&
+                                                                                   versions.TryGetValue(version, out var categories) &&
+                                                                                   categories.TryGetValue(category, out var path)
+        ? $"{Constants.DataPath}/{path}/{category}.json"
+        : null;
 }
