@@ -106,6 +106,29 @@ namespace MinecraftDataParserGenerator
                 sb.AppendLine($"        public const string {name} = \"{version}\";");
             }
 
+            sb.AppendLine();
+            sb.AppendLine("        public static IEnumerable<string> GetAll()");
+            sb.AppendLine("        {");
+
+            foreach (var version in versions)
+            {
+                var name = ConvertVersionToConstName(version);
+
+                if (name == "Latest")
+                {
+                    continue;
+                }
+
+                if (!usedNames.Contains(name))
+                {
+                    continue;
+                }
+
+                sb.AppendLine($"            yield return {name};");
+            }
+
+            sb.AppendLine("        }");
+
             sb.AppendLine("    }");
             sb.AppendLine("}");
 
@@ -137,6 +160,18 @@ namespace MinecraftDataParserGenerator
                 var editionName = ConvertToPascalCase(edition);
                 sb.AppendLine($"        public const string {editionName} = \"{edition}\";");
             }
+
+            sb.AppendLine();
+            sb.AppendLine("        public static IEnumerable<string> GetAll()");
+            sb.AppendLine("        {");
+
+            foreach (var edition in editions)
+            {
+                var editionName = ConvertToPascalCase(edition);
+                sb.AppendLine($"            yield return {editionName};");
+            }
+
+            sb.AppendLine("        }");
 
             sb.AppendLine("    }");
             sb.AppendLine("}");
