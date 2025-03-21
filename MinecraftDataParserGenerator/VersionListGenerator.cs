@@ -74,7 +74,7 @@ namespace MinecraftDataParserGenerator
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("namespace MinecraftData");
+            sb.AppendLine("namespace MinecraftDataCSharp");
             sb.AppendLine("{");
             sb.AppendLine("    public static class " + className);
             sb.AppendLine("    {");
