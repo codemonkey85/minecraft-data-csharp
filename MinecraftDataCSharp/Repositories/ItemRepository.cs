@@ -1,26 +1,23 @@
 ﻿namespace MinecraftDataCSharp.Repositories;
 
-public class ItemRepository(IFileApi fileApi)
+public class ItemRepository(IFileApi fileApi, MinecraftDataManager dataManager)
 {
+    private static readonly JsonSerializerOptions JsonSerializerOptions = new() { TypeInfoResolver = ItemJsonContext.Default };
+
     private IFileApi FileApi { get; } = fileApi;
 
-    private List<Item> Items { get; set; } = [];
+    private MinecraftDataManager DataManager { get; } = dataManager;
 
-    private static readonly JsonSerializerOptions JsonSerializerOptions = new()
-    {
-        TypeInfoResolver = ItemJsonContext.Default
-    };
+    private List<Item> Items { get; set; } = [];
 
     // ReSharper disable once MemberCanBePrivate.Global
     // ReSharper disable once UnusedMethodReturnValue.Global
     public async Task<List<Item>> GetAllItems()
     {
-        if (Items.Count != 0)
-        {
-            return Items;
-        }
+        var filePath = DataManager.GetFilePath(Constants.ItemsFilePath)
+                       ?? throw new FileNotFoundException("Items file path not found for the selected version.");
 
-        var fileText = await FileApi.ReadAllText(Constants.ItemsFilePath);
+        var fileText = await FileApi.ReadAllText(filePath);
 
         return Items = JsonSerializer.Deserialize<List<Item>>(fileText, JsonSerializerOptions) ?? [];
     }
@@ -41,9 +38,11 @@ public class ItemRepository(IFileApi fileApi)
     public async Task<List<Item>> SearchItemsByName(string name)
     {
         await GetAllItems();
-        return Items.Where(item =>
+        return
+        [
+            .. Items.Where(item =>
                 item.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
-            .ToList();
+        ];
     }
 }
 
@@ -53,14 +52,24 @@ internal partial class ItemJsonContext : JsonSerializerContext;
 
 public class Item
 {
-    [JsonPropertyName("id")] public int Id { get; set; }
-    [JsonPropertyName("name")] public string Name { get; set; } = string.Empty;
-    [JsonPropertyName("displayName")] public string DisplayName { get; set; } = string.Empty;
-    [JsonPropertyName("stackSize")] public int StackSize { get; set; }
+    [JsonPropertyName("id")]
+    public int Id { get; set; }
+
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = string.Empty;
+
+    [JsonPropertyName("displayName")]
+    public string DisplayName { get; set; } = string.Empty;
+
+    [JsonPropertyName("stackSize")]
+    public int StackSize { get; set; }
 
     [JsonPropertyName("enchantCategories")]
     public string[] EnchantCategories { get; set; } = [];
 
-    [JsonPropertyName("maxDurability")] public int MaxDurability { get; set; }
-    [JsonPropertyName("repairWith")] public string[] RepairWith { get; set; } = [];
+    [JsonPropertyName("maxDurability")]
+    public int MaxDurability { get; set; }
+
+    [JsonPropertyName("repairWith")]
+    public string[] RepairWith { get; set; } = [];
 }

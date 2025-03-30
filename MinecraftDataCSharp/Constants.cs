@@ -2,25 +2,19 @@
 
 public static class Constants
 {
-    private const string RootPath = "data";
-    private const string Edition = "pc";
-    private const string Version = "1.20";
+    public const string DataPath = "data/data/";
 
-    public const string BlocksFilePath =
-        $@"{RootPath}\data\{Edition}\{Version}\blocks.json";
+    public const string DataPathsJson = $"{DataPath}dataPaths.json";
 
-    public const string EffectsFilePath =
-        $@"{RootPath}\data\{Edition}\{Version}\effects.json";
+    public const string BlocksFilePath = "blocks";
 
-    public const string ItemsFilePath =
-        $@"{RootPath}\data\{Edition}\{Version}\items.json";
+    public const string EffectsFilePath = "effects";
 
-    public const string BiomesFilePath =
-        $@"{RootPath}\data\{Edition}\{Version}\biomes.json";
+    public const string ItemsFilePath = "items";
 
-    public const string EntitiesFilePath =
-        $@"{RootPath}\data\{Edition}\{Version}\entities.json";
+    public const string BiomesFilePath = "biomes";
 
-    public const string EnchantmentsFilePath =
-        $@"{RootPath}\data\{Edition}\{Version}\enchantments.json";
+    public const string EntitiesFilePath = "entities";
+
+    public const string EnchantmentsFilePath = "enchantments";
 }
