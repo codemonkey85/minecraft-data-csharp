@@ -2,6 +2,14 @@ namespace TestWebApp.Pages;
 
 public partial class Home
 {
+    private string LatestPcVersion { get; set; } = PcVersions.Latest;
+    
+    private string LatestBedrockVersion { get; set; } = BedrockVersions.Latest;
+
+    private List<string> PcVersionsList { get; set; } = [];
+
+    private List<string> BedrockVersionsList { get; set; } = [];
+
     private List<Block> BlocksList { get; set; } = [];
 
     private List<Item> ItemsList { get; set; } = [];
@@ -16,12 +24,20 @@ public partial class Home
 
     protected override async Task OnInitializedAsync()
     {
+        await base.OnInitializedAsync();
+        InitializeVersions();
         await InitializeBlocks();
         await InitializeItems();
         await InitializeEffects();
         await InitializeBiomes();
         await InitializeEntities();
         await InitializeEnchantments();
+    }
+
+    private void InitializeVersions()
+    {
+        PcVersionsList = [.. PcVersions.GetAll()];
+        BedrockVersionsList = [.. BedrockVersions.GetAll()];
     }
 
     private async Task InitializeItems() =>

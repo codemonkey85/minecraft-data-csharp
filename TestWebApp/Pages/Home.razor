@@ -8,7 +8,9 @@
     Minecraft Data - C#
 </h1>
 
-@if (BlocksList is [] &&
+@if (PcVersionsList is [] &&
+     BedrockVersionsList is [] &&
+     BlocksList is [] &&
      ItemsList is [] &&
      EffectsList is [] &&
      BiomesList is [] &&
@@ -18,6 +20,46 @@
     <p>
         Loading data...
     </p>
+}
+
+@if (PcVersionsList is { Count: > 0 })
+{
+    <h2>Pc Versions</h2>
+
+    <ul>
+        @foreach (var version in PcVersionsList.Take(10))
+        {
+            <li>
+                @version
+            </li>
+        }
+    </ul>
+
+    <div>
+        <p>
+            Latest: @LatestPcVersion
+        </p>
+    </div>
+}
+
+@if (BedrockVersionsList is { Count: > 0 })
+{
+    <h2>Bedrock Versions</h2>
+
+    <ul>
+        @foreach (var version in BedrockVersionsList.Take(10))
+        {
+            <li>
+                @version
+            </li>
+        }
+    </ul>
+
+    <div>
+        <p>
+            Latest: @LatestBedrockVersion
+        </p>
+    </div>
 }
 
 @if (BlocksList is { Count: > 0 })
