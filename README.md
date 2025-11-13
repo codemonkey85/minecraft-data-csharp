@@ -13,4 +13,5 @@ Used for [MinecraftCommandBuilder](https://github.com/codemonkey85/MinecraftComm
 [![Dependabot Updates](https://github.com/codemonkey85/minecraft-data-csharp/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/codemonkey85/minecraft-data-csharp/actions/workflows/dependabot/dependabot-updates)
 
 [nugetlogo]: https://img.shields.io/nuget/v/MinecraftDataCSharp.svg?style=flat-square&label=MinecraftDataCSharp%20on%20Nuget
+
 [nugetlink]: https://www.nuget.org/packages/MinecraftDataCSharp/

@@ -2,9 +2,9 @@ namespace TestWebApp.Pages;
 
 public partial class Home
 {
-    private string LatestPcVersion { get; set; } = PcVersions.Latest;
-    
-    private string LatestBedrockVersion { get; set; } = BedrockVersions.Latest;
+    private string LatestPcVersion { get; } = PcVersions.Latest;
+
+    private string LatestBedrockVersion { get; } = BedrockVersions.Latest;
 
     private List<string> PcVersionsList { get; set; } = [];
 
