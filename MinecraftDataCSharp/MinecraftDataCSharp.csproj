@@ -16,7 +16,7 @@
         <PackageTags>minecraft;csharp;</PackageTags>
         <PackageReleaseNotes>Initial release</PackageReleaseNotes>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
-        <Version>2025.11.24.00</Version>
+        <Version>2025.12.09.00</Version>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
