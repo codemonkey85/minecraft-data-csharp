@@ -149,13 +149,14 @@ namespace MinecraftDataParserGenerator
         private static string GenerateEditionsClass(IEnumerable<string> editions)
         {
             var sb = new StringBuilder();
+            var editionsList =  editions.ToList();
 
             sb.AppendLine("namespace MinecraftDataCSharp");
             sb.AppendLine("{");
             sb.AppendLine("    public static class Editions");
             sb.AppendLine("    {");
 
-            foreach (var edition in editions)
+            foreach (var edition in editionsList)
             {
                 var editionName = ConvertToPascalCase(edition);
                 sb.AppendLine($"        public const string {editionName} = \"{edition}\";");
@@ -165,7 +166,7 @@ namespace MinecraftDataParserGenerator
             sb.AppendLine("        public static IEnumerable<string> GetAll()");
             sb.AppendLine("        {");
 
-            foreach (var edition in editions)
+            foreach (var edition in editionsList)
             {
                 var editionName = ConvertToPascalCase(edition);
                 sb.AppendLine($"            yield return {editionName};");
