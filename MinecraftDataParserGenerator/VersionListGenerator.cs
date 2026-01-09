@@ -149,7 +149,7 @@ namespace MinecraftDataParserGenerator
         private static string GenerateEditionsClass(IEnumerable<string> editions)
         {
             var sb = new StringBuilder();
-            var editionsList =  editions.ToList();
+            var editionsList = editions.ToList();
 
             sb.AppendLine("namespace MinecraftDataCSharp");
             sb.AppendLine("{");
