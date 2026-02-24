@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v6.0.2
         with:
           # Fetches all commits (needed for lerna / semantic release to correctly calculate version)
           fetch-depth: 0
@@ -25,7 +25,7 @@ jobs:
           submodules: "recursive"
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v5.0.1
+        uses: actions/setup-dotnet@v5.1.0
         with:
           global-json-file: ./global.json
 
